@@ -35,6 +35,9 @@
 
 (when 'display-graphic-p (lambda ()
                            (global-hl-line-mode t)))
+
+(global-whitespace-mode)
+(setq whitespace-style '(face trailing tabs spaces lines empty indentation space-after-tab space-before-tab space-mark tab-mark))
 ;; End display
 
 ;; Auto generated config
@@ -47,7 +50,7 @@
 (setq-default tab-width 2)
 (setq-default c-default-style "linux"
               c-basic-offset 8
-	      tab-width 8)
+              tab-width 8)
 ;; End text Formatting
 
 ;; Plugins
