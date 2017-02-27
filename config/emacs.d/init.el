@@ -53,6 +53,12 @@
               tab-width 8)
 ;; End text Formatting
 
+;; Backup Files
+
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+
+;; End Backup Files
+
 ;; Plugins
 
 ;; Themes
