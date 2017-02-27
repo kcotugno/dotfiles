@@ -5,6 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -88,6 +89,9 @@ nmap <C-\> :NERDTreeToggle<CR>
 nmap <leader>. :TagbarToggle<CR>
 
 " Plugin configuration
+" NERD Commenter
+let g:NERDSpaceDelims = 1
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
