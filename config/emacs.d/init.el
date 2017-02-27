@@ -101,4 +101,13 @@
                              (org-bullets-mode t))))
 (use-package magit)
 
+(use-package helm
+             :config
+             (helm-mode t))
+
+(use-package helm-projectile
+             :config
+             (helm-projectile-on))
+
+
 ;; End Plugins
