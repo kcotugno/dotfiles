@@ -107,6 +107,7 @@
 
 (use-package helm-projectile
              :config
+             (evil-leader/set-key "p" 'helm-projectile)
              (helm-projectile-on))
 
 
