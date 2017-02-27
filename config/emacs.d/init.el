@@ -74,6 +74,10 @@
 
 ;; End themes
 
+(use-package company
+             :config
+             (company-mode))
+
 (use-package evil
              :config
              (evil-mode t)
