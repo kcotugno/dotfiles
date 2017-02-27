@@ -11,7 +11,8 @@
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" .
+                                 "https://stable.melpa.org/packages/"))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -37,7 +38,9 @@
                            (global-hl-line-mode t)))
 
 (global-whitespace-mode)
-(setq whitespace-style '(face trailing tabs spaces lines empty indentation space-after-tab space-before-tab space-mark tab-mark))
+(setq whitespace-style '(face trailing tabs spaces lines empty indentation
+                              space-after-tab space-before-tab space-mark
+                              tab-mark))
 ;; End display
 
 ;; Auto generated config
