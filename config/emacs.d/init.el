@@ -91,7 +91,13 @@
 (use-package evil
              :config
              (evil-mode t)
-             (global-set-key (kbd "C-c C-c") 'evil-force-normal-state))
+             (define-key evil-normal-state-map "\C-k" 'evil-normal-state)
+             (define-key evil-insert-state-map "\C-k" 'evil-normal-state)
+             (define-key evil-visual-state-map "\C-k" 'evil-normal-state)
+             (define-key evil-replace-state-map "\C-k" 'evil-normal-state)
+             (define-key evil-insert-state-map "\C-c\C-c" 'evil-normal-state)
+             (define-key evil-normal-state-map "\C-i" 'evil-scroll-up)
+             (define-key evil-visual-state-map "\C-i" 'evil-scroll-up))
 
 
 (use-package evil-leader
