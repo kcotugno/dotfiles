@@ -34,6 +34,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
+(set-default 'truncate-lines t)
+(set-default 'truncate-partial-width-windows nil)
 
 (when 'display-graphic-p (lambda ()
                            (global-hl-line-mode t)))
