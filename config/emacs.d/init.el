@@ -103,13 +103,15 @@
              (define-key evil-normal-state-map "\C-i" 'evil-scroll-up)
              (define-key evil-visual-state-map "\C-i" 'evil-scroll-up))
 
-
 (use-package evil-leader
              :config
              (global-evil-leader-mode)
              (evil-leader/set-leader "\\"))
 
+(use-package evil-surround)
+
 (use-package evil-org)
+
 
 (use-package powerline
              :config
