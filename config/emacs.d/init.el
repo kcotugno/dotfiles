@@ -37,6 +37,8 @@
 (set-default 'truncate-lines t)
 (set-default 'truncate-partial-width-windows nil)
 
+(set-default 'scroll-conservatively 100)
+
 (when 'display-graphic-p (lambda ()
                            (global-hl-line-mode t)))
 
