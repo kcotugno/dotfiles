@@ -90,6 +90,9 @@ nmap <C-\> :NERDTreeToggle<CR>
 nmap <leader>. :TagbarToggle<CR>
 
 " Plugin configuration
+" ctrlp
+let g:ctrlp_custom_ignore = "node_modules/"
+
 " NERD Commenter
 let g:NERDSpaceDelims = 1
 
