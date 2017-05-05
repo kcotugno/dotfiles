@@ -2,6 +2,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins
+Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
@@ -13,16 +14,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
-Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
 " vim-plug---END
 
-set number
+" Solarized
 syntax enable
 set background=dark
 colorscheme solarized
+call togglebg#map("")
+
+set number
 set nowrap
 filetype plugin indent on
 
