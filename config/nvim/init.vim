@@ -25,6 +25,17 @@ set background=dark
 colorscheme solarized
 call togglebg#map("")
 
+function SetWhitespace()
+  if &background == 'dark'
+    hi Whitespace ctermfg=0
+  else
+    hi Whitespace ctermfg=7
+  end
+endfunction
+
+call SetWhitespace()
+map <F5> :ToggleBG<CR> :call SetWhitespace()<CR>
+
 set number
 set nowrap
 filetype plugin indent on
