@@ -59,7 +59,6 @@ autocmd BufLeave * if &buftype == '' && !&readonly && &modifiable && &modified &
 
 augroup END
 
-
 set statusline=%f
 set statusline+=\ %y
 set statusline+=[%{&ff}]
