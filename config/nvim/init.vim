@@ -106,7 +106,8 @@ nmap <leader>. :TagbarToggle<CR>
 
 " Plugin configuration
 " ctrlp
-let g:ctrlp_custom_ignore = "node_modules/"
+let g:ctrlp_custom_ignore = '\v(node_modules|\.git|tmp)$'
+let g:ctrlp_show_hidden = 1
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1
