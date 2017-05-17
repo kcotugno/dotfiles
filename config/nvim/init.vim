@@ -41,7 +41,7 @@ set nowrap
 filetype plugin indent on
 
 set list
-set listchars=tab:»»,trail:~
+set listchars=tab:――,space:·,trail:·
 
 set tabstop=2
 set shiftwidth=2
