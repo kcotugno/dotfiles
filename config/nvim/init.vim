@@ -122,6 +122,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_error_symbol = "\u2717"
 let g:syntastic_warning_symbol = "\uFE0E"
