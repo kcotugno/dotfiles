@@ -101,8 +101,14 @@ function AddGitGutterToStatusline()
 endfunction
 
 " Shortcuts
+" Plugins
 nmap <C-\> :NERDTreeToggle<CR>
 nmap <leader>. :TagbarToggle<CR>
+
+" Tabs
+nmap <leader>tt :tabnew<CR>
+nmap <leader>tn :tabnext<CR>
+nmap <leader>tp :tabprevious<CR>
 
 " Plugin configuration
 " ctrlp
