@@ -43,14 +43,8 @@ filetype plugin indent on
 set list
 set listchars=tab:――,space:·,trail:·
 
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-autocmd BufRead,BufNewFile *.h,*.c,*.cpp, set tabstop=8 shiftwidth=8 expandtab
 autocmd BufRead,BufNewFile *.cs,*.java set tabstop=4 shiftwidth=4 expandtab
-autocmd BufRead,BufNewFile *.go set tabstop=8 shiftwidth=8 noexpandtab
-autocmd BufRead,BufNewFile *.asm set filetype=nasm
+autocmd BufRead,BufNewFile *.rb,*.css,*.js set tabstop=2 shiftwidth=2 expandtab
 autocmd FileType crontab set backupcopy=yes
 
 function TrimTrailingInvisibles()
