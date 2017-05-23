@@ -54,11 +54,25 @@
 ;; End auto generated config
 
 ;; Text Formatting
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
+(setq-default standard-indent 8)
 (setq-default c-default-style "linux"
               c-basic-offset 8
               tab-width 8)
+
+(add-hook 'emacs-lisp-mode-hook (setq indent-tabs-mode nil))
+(add-hook 'ruby-mode-hook (lambda ()
+                            (setq evil-shift-width 2)
+                            (setq indent-tabs-mode nil)
+                            (setq tab-width 2)))
+(add-hook 'js-mode-hook (lambda ()
+                          (setq evil-shift-width 2)
+                          (setq indent-tabs-mode nil)
+                          (setq js-indent-level 2)))
+(add-hook 'css-mode-hook (lambda ()
+                           (setq evil-shift-width 2)
+                           (setq indent-tabs-mode nil)
+                           (setq tab-width 2)
+                           (setq css-indent-offset 2)))
 ;; End text Formatting
 
 ;; Backup Files
