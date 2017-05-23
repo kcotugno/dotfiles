@@ -34,10 +34,10 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
-(set-default 'truncate-lines t)
-(set-default 'truncate-partial-width-windows nil)
+(setq-default truncate-lines t)
+(setq-default truncate-partial-width-windows nil)
 
-(set-default 'scroll-conservatively 100)
+(setq-default scroll-conservatively 100)
 
 (when 'display-graphic-p (lambda ()
                            (global-hl-line-mode t)))
@@ -103,24 +103,24 @@
 ;; End themes
 
 (use-package company
-             :config
-             (company-mode))
+  :config
+  (company-mode))
 
 (use-package evil
-             :config
-             (evil-mode t)
-             (define-key evil-normal-state-map "\C-k" 'evil-normal-state)
-             (define-key evil-insert-state-map "\C-k" 'evil-normal-state)
-             (define-key evil-visual-state-map "\C-k" 'evil-normal-state)
-             (define-key evil-replace-state-map "\C-k" 'evil-normal-state)
-             (define-key evil-insert-state-map "\C-c\C-c" 'evil-normal-state)
-             (define-key evil-normal-state-map "\C-i" 'evil-scroll-up)
-             (define-key evil-visual-state-map "\C-i" 'evil-scroll-up))
+  :config
+  (evil-mode t)
+  (define-key evil-normal-state-map "\C-k" 'evil-normal-state)
+  (define-key evil-insert-state-map "\C-k" 'evil-normal-state)
+  (define-key evil-visual-state-map "\C-k" 'evil-normal-state)
+  (define-key evil-replace-state-map "\C-k" 'evil-normal-state)
+  (define-key evil-insert-state-map "\C-c\C-c" 'evil-normal-state)
+  (define-key evil-normal-state-map "\C-i" 'evil-scroll-up)
+  (define-key evil-visual-state-map "\C-i" 'evil-scroll-up))
 
 (use-package evil-leader
-             :config
-             (global-evil-leader-mode)
-             (evil-leader/set-leader "\\"))
+  :config
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "\\"))
 
 (use-package evil-surround)
 
@@ -128,23 +128,22 @@
 
 
 (use-package powerline
-             :config
-             (powerline-default-theme))
+  :config
+  (powerline-default-theme))
 
 (use-package org-bullets
-             :config
-             (add-hook 'org-mode-hook (lambda ()
-                             (org-bullets-mode t))))
+ :config
+ (add-hook 'org-mode-hook (lambda ()
+                            (org-bullets-mode t))))
 (use-package magit)
 
 (use-package helm
-             :config
-             (helm-mode t))
+  :config
+  (helm-mode t))
 
 (use-package helm-projectile
-             :config
-             (evil-leader/set-key "p" 'helm-projectile)
-             (helm-projectile-on))
-
+  :config
+  (evil-leader/set-key "p" 'helm-projectile)
+  (helm-projectile-on))
 
 ;; End Plugins
