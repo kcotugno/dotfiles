@@ -36,8 +36,7 @@
 
 (setq-default scroll-conservatively 100)
 
-
-(when 'display-graphic-p (lambda ()
+(when (display-graphic-p) (progn
                            (global-hl-line-mode t)
                            (scroll-bar-mode -1)))
 
