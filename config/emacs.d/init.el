@@ -58,20 +58,25 @@
               c-basic-offset 8
               tab-width 8)
 
-(add-hook 'emacs-lisp-mode-hook (setq indent-tabs-mode nil))
+(add-hook 'emacs-lisp-mode-hook (lambda ()
+                                  (setq indent-tabs-mode nil)))
 (add-hook 'ruby-mode-hook (lambda ()
-                            (setq evil-shift-width 2)
                             (setq indent-tabs-mode nil)
+                            (setq evil-shift-width 2)
                             (setq tab-width 2)))
 (add-hook 'js-mode-hook (lambda ()
-                          (setq evil-shift-width 2)
                           (setq indent-tabs-mode nil)
+                          (setq evil-shift-width 2)
                           (setq js-indent-level 2)))
 (add-hook 'css-mode-hook (lambda ()
-                           (setq evil-shift-width 2)
                            (setq indent-tabs-mode nil)
+                           (setq evil-shift-width 2)
                            (setq tab-width 2)
                            (setq css-indent-offset 2)))
+(add-hook 'org-mode-hook (lambda ()
+                           (setq indent-tabs-mode nil)
+                           (setq tab-width 2)
+                           (setq evil-shift-width 2)))
 ;; End text Formatting
 
 ;; Backup Files
