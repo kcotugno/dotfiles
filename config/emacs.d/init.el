@@ -27,20 +27,19 @@
 (set-default-font "Source Code Pro-12")
 (line-number-mode t)
 (global-linum-mode t)
-(when 'display-graphic-p
-  (global-hl-line-mode))
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
 (setq-default truncate-lines t)
 (setq-default truncate-partial-width-windows nil)
 
 (setq-default scroll-conservatively 100)
 
+
 (when 'display-graphic-p (lambda ()
-                           (global-hl-line-mode t)))
+                           (global-hl-line-mode t)
+                           (scroll-bar-mode -1)))
 
 (global-whitespace-mode)
 (setq whitespace-style '(face trailing tabs spaces lines empty indentation
