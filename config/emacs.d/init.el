@@ -105,9 +105,16 @@
 
 ;; End themes
 
+(use-package org)
+
+(use-package org-bullets
+ :config
+ (add-hook 'org-mode-hook (lambda ()
+                            (org-bullets-mode t))))
+
 (use-package company
   :config
-  (company-mode))
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package evil
   :config
@@ -129,15 +136,10 @@
 
 (use-package evil-org)
 
-
 (use-package powerline
   :config
   (powerline-default-theme))
 
-(use-package org-bullets
- :config
- (add-hook 'org-mode-hook (lambda ()
-                            (org-bullets-mode t))))
 (use-package magit)
 
 (use-package helm
