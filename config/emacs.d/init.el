@@ -87,21 +87,38 @@
 ;; Plugins
 
 ;; Themes
-(use-package dash)
 
-(-each
-    (-map
-     (lambda (item)
-       (format "~/.emacs.d/themes/%s" item))
-     (-remove
-      (lambda (item) (or (string= item ".") (string= item "..")))
-      (directory-files ".emacs.d/themes/")))
-  (lambda (item)
-    (add-to-list 'custom-theme-load-path item)))
+(defun flip-background ()
+  "Flip the frame and terminal background mode.
+useful for alternating between light and dark themes"
+  (interactive)
+  (let ((mode (if (or (eq (frame-parameter nil 'background-mode) 'dark)
+                      (eq (terminal-parameter nil 'background-mode) 'dark))
+                  (setq mode 'light)
+                (setq mode 'dark))))
+        (set-frame-parameter nil 'background-mode mode)
+        (set-terminal-parameter nil 'background-mode mode)
+        (dolist (theme custom-enabled-themes)
+                 (enable-theme theme))))
 
-(load-theme 'solarized t)
-(set-frame-parameter nil 'background-mode 'dark)
-(enable-theme 'solarized)
+(global-set-key (kbd "<f5>") 'flip-background)
+
+;; Load directories in the .emacs.d/themes directory to the load path
+;; TODO Only add directories
+(mapcar (lambda (item)
+          (add-to-list 'custom-theme-load-path item))
+        (mapcar (lambda (item)
+                  (format "%s/.emacs.d/themes/%s/" (getenv "HOME") item))
+                (let (files '())
+                  (dolist (val
+                           (directory-files (format "%s/.emacs.d/themes/"
+                                                    (getenv "HOME")))
+                           files)
+                    (let ((off (string-match "\\." val)))
+                      (unless (and off (eq off 0))
+                        (setq files (cons val files))))))))
+
+(when (load-theme 'solarized t) (flip-background))
 
 ;; End themes
 
