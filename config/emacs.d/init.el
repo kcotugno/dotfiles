@@ -37,8 +37,8 @@
 (setq-default scroll-conservatively 100)
 
 (when (display-graphic-p) (progn
-                           (global-hl-line-mode t)
-                           (scroll-bar-mode -1)))
+                            (global-hl-line-mode t)
+                            (scroll-bar-mode -1)))
 
 (global-whitespace-mode)
 (setq whitespace-style '(face trailing tabs spaces lines empty indentation
