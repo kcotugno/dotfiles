@@ -105,6 +105,9 @@ nmap <leader>tt :tabnew<CR>
 nmap <leader>tn :tabnext<CR>
 nmap <leader>tp :tabprevious<CR>
 
+" Misc
+nmap <leader>h :noh<CR>
+
 " Plugin configuration
 " ctrlp
 let g:ctrlp_custom_ignore = '\v(node_modules|\.git|tmp)$'
