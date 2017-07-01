@@ -104,6 +104,8 @@ nmap <leader>. :TagbarToggle<CR>
 nmap <leader>tt :tabnew<CR>
 nmap <leader>tn :tabnext<CR>
 nmap <leader>tp :tabprevious<CR>
+nmap <leader>tc :tabclose<CR>
+nmap <leader>tm :tabmove<CR>
 
 " Misc
 nmap <leader>h :noh<CR>
