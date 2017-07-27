@@ -41,6 +41,8 @@ set number
 set nowrap
 filetype plugin indent on
 
+set mouse=a
+
 set list
 set listchars=tab:――,space:·,trail:·
 
