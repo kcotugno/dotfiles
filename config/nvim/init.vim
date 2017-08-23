@@ -7,6 +7,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'kien/ctrlp.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'majutsushi/tagbar'
+Plug 'posva/vim-vue'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
