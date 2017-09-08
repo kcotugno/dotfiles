@@ -24,6 +24,8 @@ call plug#end()
 syntax enable
 set background=dark
 colorscheme solarized
+set cursorline
+set colorcolumn=80,100
 call togglebg#map("")
 
 function SetWhitespace()
