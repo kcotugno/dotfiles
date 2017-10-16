@@ -14,6 +14,9 @@
 (add-to-list 'package-archives '("melpa-stable" .
                                  "https://stable.melpa.org/packages/"))
 
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(add-to-list 'exec-path "/usr/local/bin")
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -145,27 +148,56 @@ useful for alternating between light and dark themes"
   (define-key evil-visual-state-map "\C-i" 'evil-scroll-up))
 
 (use-package evil-leader
+  :ensure t
+  :after evil
   :config
   (global-evil-leader-mode)
   (evil-leader/set-leader "\\"))
 
-(use-package evil-surround)
+(use-package evil-surround
+  :ensure t)
 
-(use-package evil-org)
+(use-package evil-org
+  :ensure t
+  :after org evil
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme))))
 
 (use-package powerline
+  :ensure t
   :config
   (powerline-default-theme))
 
-(use-package magit)
+(use-package magit
+  :ensure t)
 
 (use-package helm
+  :ensure t
   :config
   (helm-mode t))
 
 (use-package helm-projectile
+  :ensure t
   :config
   (evil-leader/set-key "p" 'helm-projectile)
   (helm-projectile-on))
+
+(require 'mu4e)
+(setq mu4e-maildir (concat (getenv "HOME") "/.mail"))
+(setq mu4e-drafts-folder "/Drafts")
+(setq mu4e-sent-folder "/Sent")
+(setq mu4e-trash-folder "/Trash")
+(setq mu4e-get-mail-command "offlineimap")
+
+(setq mu4e-compose-reply-to-address "kevin@kevincotugno.com"
+      user-mail-address "kevin@kevincotugno.com"
+      user-full-name "Kevin Cotugno")
+(setq
+ message-send-mail-function 'smtpmail-send-it
+ smtpmail-smtp-server "smtp.cotugno.family"
+ smtpmail-stream-type 'ssl
+ smtpmail-smtp-service 587)
+(setq message-kill-buffer-on-exit t)
 
 ;; End Plugins
