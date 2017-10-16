@@ -47,6 +47,7 @@
 (setq whitespace-style '(face trailing tabs spaces lines empty indentation
                               space-after-tab space-before-tab space-mark
                               tab-mark))
+(setq fill-column 80)
 ;; End display
 
 ;; Auto generated config
@@ -125,18 +126,23 @@ useful for alternating between light and dark themes"
 
 ;; End themes
 
-(use-package org)
+(use-package org
+  :ensure t)
 
 (use-package org-bullets
- :config
- (add-hook 'org-mode-hook (lambda ()
-                            (org-bullets-mode t))))
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+                             (org-bullets-mode t))))
 
 (use-package company
+  :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package evil
+  :ensure t
   :config
   (evil-mode t)
   (define-key evil-normal-state-map "\C-k" 'evil-normal-state)
