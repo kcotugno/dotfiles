@@ -3,12 +3,12 @@ if [[ -d "$HOME/dev" ]]; then
 fi
 
 if [[ -n "$(echo $SHELL | grep zsh)" ]]; then
-	export ZSH=$HOME/.oh-my-zsh
+	export ZSH="$HOME/.oh-my-zsh"
 
 	ZSH_THEME="jispwoso"
 
 	plugins=(git)
-	source $ZSH/oh-my-zsh.sh
+	source "$ZSH/oh-my-zsh.sh"
 fi
 
 if [[ -d "$HOME/.rvm" ]]; then
@@ -18,11 +18,11 @@ if [[ -d "$HOME/.rvm" ]]; then
 fi
 
 if [[ -d "$DEVPATH/android/android-sdk" ]]; then
-	export ANDROID_SDK=$HOME/dev/android/android-sdk
+	export ANDROID_SDK="$HOME/dev/android/android-sdk"
 fi
 
 if [[ -d "$DEVPATH/android/android-ndk" ]]; then
-	export ANDROID_NDK=$HOME/dev/android/android-ndk
+	export ANDROID_NDK="$HOME/dev/android/android-ndk"
 fi
 
 which go &> /dev/null
@@ -52,7 +52,7 @@ if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
 	source "$HOME/.ssh-sentinel.sh"
 fi
 
-export EDITOR='nvim'
+export EDITOR="nvim"
 
 alias l="ls -lah"
 alias ll="ls -lh"
