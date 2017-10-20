@@ -1,4 +1,6 @@
-export DEVPATH=$HOME/dev
+if [[ -d "$HOME/dev" ]]; then
+	export DEVPATH="$HOME/dev"
+fi
 
 if [[ -n "$(echo $SHELL | grep zsh)" ]]; then
 	export ZSH=$HOME/.oh-my-zsh
@@ -24,8 +26,8 @@ if [[ -d "$DEVPATH/android/android-ndk" ]]; then
 fi
 
 which go &> /dev/null
-if (( !$? )); then
-	export GOPATH=$DEVPATH/go
+if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
+	export GOPATH="$DEVPATH/go"
 fi
 
 function passgen () {
