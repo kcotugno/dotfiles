@@ -48,10 +48,12 @@ function passgen () {
 		tr "$tr1" "$tr2" && echo
 }
 
+if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
+	source "$HOME/.ssh-sentinel.sh"
+fi
+
 export EDITOR='nvim'
 
 alias l="ls -lah"
 alias ll="ls -lh"
 alias la="ls -lah"
-
-source $HOME/.ssh-sentinel.sh
