@@ -2,7 +2,7 @@ if [[ -d "$HOME/dev" ]]; then
 	export DEVPATH="$HOME/dev"
 fi
 
-if [[ -n "$(echo $SHELL | grep zsh)" ]]; then
+if [[ -n "$ZSH_VERSION" ]]; then
 	export ZSH="$HOME/.oh-my-zsh"
 
 	ZSH_THEME="jispwoso"
