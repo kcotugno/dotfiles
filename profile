@@ -52,7 +52,20 @@ if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
 	source "$HOME/.ssh-sentinel.sh"
 fi
 
-export EDITOR="nvim"
+which nvim &> /dev/null
+neovim="$?"
+
+which vim &> /dev/null
+vim="$?"
+
+if (( !$neovim )); then
+	export EDITOR="nvim"
+elif (( !$vim )); then
+	export EDITOR="vim"
+else
+	export EDITOR="vi"
+fi
+
 
 alias l="ls -lah"
 alias ll="ls -lh"
