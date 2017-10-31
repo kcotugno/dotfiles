@@ -31,10 +31,10 @@ if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
 fi
 
 function passgen () {
-	local len=$1
-	local lower=$2
+	local len="$1"
+	local lower="$2"
 
-	echo $len | grep -q '^[0-9]+$'
+	echo "$len" | grep -q '^[0-9]+$'
 	if (( ! $? )); then
 		len=32
 	fi
@@ -44,7 +44,7 @@ function passgen () {
 		local tr2="[:lower:]"
 	fi
 
-	cat /dev/urandom | base64 | head -c $len | tr -d "\n" | \
+	cat /dev/urandom | base64 | head -c "$len" | tr -d "\n" | \
 		tr "$tr1" "$tr2" && echo
 }
 
