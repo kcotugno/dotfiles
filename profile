@@ -66,6 +66,8 @@ else
 	export EDITOR="vi"
 fi
 
+alias e="$EDITOR"
+alias s="du -sh"
 
 alias l="ls -lah"
 alias ll="ls -lh"
