@@ -1,8 +1,4 @@
-if [[ -d "$HOME/dev" ]]; then
-	export DEVPATH="$HOME/dev"
-fi
-
-if [[ -n "$ZSH_VERSION" ]]; then
+if [[ -n "$(echo $SHELL | grep zsh)" ]]; then
 	export ZSH="$HOME/.oh-my-zsh"
 
 	ZSH_THEME="jispwoso"
@@ -11,10 +7,10 @@ if [[ -n "$ZSH_VERSION" ]]; then
 	source "$ZSH/oh-my-zsh.sh"
 fi
 
-if [[ -d "$HOME/.rvm" ]]; then
-	export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if [[ -d "$HOME/devel" ]]; then
+	export DEVPATH="$HOME/devel"
+else
+	export DEVPATH="$HOME"
 fi
 
 if [[ -d "$DEVPATH/android/android-sdk" ]]; then
@@ -44,13 +40,9 @@ function passgen () {
 		local tr2="[:lower:]"
 	fi
 
-	cat /dev/urandom | base64 | head -c "$len" | tr -d "\n" | \
+	cat /dev/urandom | base64 | head -c $len | tr -d "\n" | \
 		tr "$tr1" "$tr2" && echo
 }
-
-if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
-	source "$HOME/.ssh-sentinel.sh"
-fi
 
 which nvim &> /dev/null
 neovim="$?"
@@ -64,6 +56,10 @@ elif (( !$vim )); then
 	export EDITOR="vim"
 else
 	export EDITOR="vi"
+fi
+
+if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
+	source "$HOME/.ssh-sentinel.sh"
 fi
 
 alias e="$EDITOR"
