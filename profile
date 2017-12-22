@@ -24,6 +24,7 @@ fi
 which go &> /dev/null
 if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
 	export GOPATH="$DEVPATH/go"
+	export PATH="$GOPATH/bin:$PATH"
 fi
 
 function passgen () {
