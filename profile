@@ -31,7 +31,7 @@ function passgen () {
 	local len="$1"
 	local lower="$2"
 
-	echo "$len" | grep -E '^[0-9]+$'
+	echo "$len" | grep -qE '^[0-9]+$'
 	if (( $? )); then
 		len=32
 	fi
