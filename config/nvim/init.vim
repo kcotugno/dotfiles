@@ -10,12 +10,10 @@ Plug 'majutsushi/tagbar'
 Plug 'posva/vim-vue'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/syntastic'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
-Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 
@@ -68,7 +66,7 @@ endfunction
 augroup maximus
 
 autocmd BufWrite * call TrimTrailingInvisibles() | call TrimTrailingLines()
-autocmd BufLeave * if &buftype == '' && !&readonly && &modifiable && &modified && expand("%:t") != "" | call TrimTrailingInvisibles() | call TrimTrailingLines() | w | SyntasticCheck | GitGutter | endif
+autocmd BufLeave * if &buftype == '' && !&readonly && &modifiable && &modified && expand("%:t") != "" | call TrimTrailingInvisibles() | call TrimTrailingLines() | w | GitGutter | endif
 
 augroup END
 
@@ -78,8 +76,6 @@ set statusline+=[%{&ff}]
 set statusline+=%r
 set statusline+=%h
 set statusline+=%{ModifiedSym()}
-set statusline+=%=
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%=
 set statusline+=%{AddGitGutterToStatusline()}
 set statusline+=\ [%c:%l/%L:%p%%]
@@ -127,16 +123,6 @@ let g:NERDDefaultAlign = "start"
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-
-" Syntastic
-let g:syntastic_stl_format = "[Err: first:%fe total:%e] [Warn: first:%fw total:%w]"
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_error_symbol = "\u2717"
-let g:syntastic_warning_symbol = "\uFE0E"
 
 " Tagbar
 let g:tagbar_type_go = {
