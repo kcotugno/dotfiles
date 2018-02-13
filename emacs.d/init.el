@@ -100,10 +100,10 @@ useful for alternating between light and dark themes"
                       (eq (terminal-parameter nil 'background-mode) 'dark))
                   (setq mode 'light)
                 (setq mode 'dark))))
-        (set-frame-parameter nil 'background-mode mode)
-        (set-terminal-parameter nil 'background-mode mode)
-        (dolist (theme custom-enabled-themes)
-                 (enable-theme theme))))
+    (set-frame-parameter nil 'background-mode mode)
+    (set-terminal-parameter nil 'background-mode mode)
+    (dolist (theme custom-enabled-themes)
+      (enable-theme theme))))
 
 (global-set-key (kbd "<f5>") 'flip-background)
 
