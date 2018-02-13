@@ -17,6 +17,34 @@
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (add-to-list 'exec-path "/usr/local/bin")
 
+(defun directory-files-no-directories (path)
+  "Return the list of files in PATH excluding and directories"
+  (seq-filter (lambda (item)
+                (not (null item)))
+              (mapcar (lambda (item)
+                        (if (not (eq (nth 1 item) 't))
+                            (car item)))
+                      (directory-files-and-attributes path 't))))
+
+(defun update-env-var (var list)
+  "Prepend LIST to the specified environment variable"
+  (mapc (lambda (dir)
+          (when (not (string-equal dir ""))
+            (if (or (null (getenv var)) (string-equal (getenv var) ""))
+                (setenv var dir)
+              (setenv var (format "%s:%s"
+                                  dir
+                                  (getenv var))))))
+        list))
+
+(if (eq system-type 'darwin)
+    (update-env-var "PATH" (with-temp-buffer
+                             (mapcar (lambda (item)
+                                       (insert-file-contents item))
+                                     (directory-files-no-directories "/etc/paths.d"))
+                             (insert-file-contents "/etc/paths")
+                             (split-string (buffer-string) "\n" t))))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
