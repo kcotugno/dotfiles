@@ -11,8 +11,6 @@
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" .
-                                 "https://stable.melpa.org/packages/"))
 
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (add-to-list 'exec-path "/usr/local/bin")
