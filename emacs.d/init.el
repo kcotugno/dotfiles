@@ -171,15 +171,19 @@ useful for alternating between light and dark themes"
 (use-package magit
   :ensure t)
 
+(use-package projectile
+  :ensure t)
+
 (use-package helm
   :ensure t
   :config
-  (helm-mode t))
+  (helm-mode t)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files))
 
 (use-package helm-projectile
   :ensure t
   :config
-  (evil-leader/set-key "p" 'helm-projectile)
   (helm-projectile-on))
 
 (require 'mu4e)
