@@ -63,8 +63,19 @@ if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
 	source "$HOME/.ssh-sentinel.sh"
 fi
 
+function weather() {
+	loc=$1
+	if [[ -z "$loc" ]]; then
+		loc="Lake Forest, CA"
+	fi
+
+	curl -sSL "wttr.in/$loc?m"
+}
+
 alias e="$EDITOR"
 alias s="du -sh"
+
+alias tmux="tmux -2"
 
 alias l="ls -lah"
 alias ll="ls -lh"
