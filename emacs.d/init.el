@@ -70,10 +70,10 @@
                             (scroll-bar-mode -1)))
 
 (global-whitespace-mode)
-(setq whitespace-style '(face trailing tabs spaces lines empty indentation
+(setq whitespace-style '(face trailing tabs spaces lines-tail empty indentation
                               space-after-tab space-before-tab space-mark
                               tab-mark))
-(setq fill-column 80)
+(setq-default fill-column 80)
 ;; End display
 
 ;; Auto generated config
