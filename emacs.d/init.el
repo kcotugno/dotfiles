@@ -91,21 +91,17 @@
                                   (setq indent-tabs-mode nil)))
 (add-hook 'ruby-mode-hook (lambda ()
                             (setq indent-tabs-mode nil)
-                            (setq evil-shift-width 2)
                             (setq tab-width 2)))
 (add-hook 'js-mode-hook (lambda ()
                           (setq indent-tabs-mode nil)
-                          (setq evil-shift-width 2)
                           (setq js-indent-level 2)))
 (add-hook 'css-mode-hook (lambda ()
                            (setq indent-tabs-mode nil)
-                           (setq evil-shift-width 2)
                            (setq tab-width 2)
                            (setq css-indent-offset 2)))
 (add-hook 'org-mode-hook (lambda ()
                            (setq indent-tabs-mode nil)
-                           (setq tab-width 2)
-                           (setq evil-shift-width 2)))
+                           (setq tab-width 2)))
 ;; End text Formatting
 
 ;; Backup Files
@@ -166,35 +162,6 @@ useful for alternating between light and dark themes"
   :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode))
-
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode t)
-  (define-key evil-normal-state-map "\C-k" 'evil-normal-state)
-  (define-key evil-insert-state-map "\C-k" 'evil-normal-state)
-  (define-key evil-visual-state-map "\C-k" 'evil-normal-state)
-  (define-key evil-replace-state-map "\C-k" 'evil-normal-state)
-  (define-key evil-insert-state-map "\C-c\C-c" 'evil-normal-state)
-  (define-key evil-normal-state-map "\C-i" 'evil-scroll-up)
-  (define-key evil-visual-state-map "\C-i" 'evil-scroll-up))
-
-(use-package evil-leader
-  :ensure t
-  :after evil
-  :config
-  (global-evil-leader-mode)
-  (evil-leader/set-leader "\\"))
-
-(use-package evil-surround
-  :ensure t)
-
-(use-package evil-org
-  :ensure t
-  :after org evil
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme))))
 
 (use-package powerline
   :ensure t
