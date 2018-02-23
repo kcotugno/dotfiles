@@ -199,6 +199,19 @@ useful for alternating between light and dark themes"
             (lambda ()
               (set (make-local-variable 'company-backends) '(company-go)))))
 
+(use-package rust-mode
+  :ensure t
+  :config
+  (defun rust-run () "Execute 'cargo run'"
+         (interactive)
+         (compile "cargo run"))
+
+  (bind-key (kbd "C-c C-c") 'rust-compile rust-mode-map)
+  (bind-key (kbd "C-c C-r") 'rust-run rust-mode-map)
+  (setq-local cargo-bin (concat (getenv "HOME") "/.cargo/bin"))
+  (when (file-exists-p cargo-bin)
+    (add-to-list 'exec-path cargo-bin)))
+
 (require 'mu4e)
 (setq mu4e-maildir (concat (getenv "HOME") "/.mail"))
 (setq mu4e-drafts-folder "/Drafts")
