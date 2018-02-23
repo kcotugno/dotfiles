@@ -74,6 +74,8 @@
                               space-after-tab space-before-tab space-mark
                               tab-mark))
 (setq-default fill-column 80)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; End display
 
 ;; Auto generated config
