@@ -201,7 +201,7 @@ useful for alternating between light and dark themes"
 (setq
  message-send-mail-function 'smtpmail-send-it
  smtpmail-smtp-server "smtp.cotugno.family"
- smtpmail-stream-type 'ssl
+ smtpmail-stream-type 'starttls
  smtpmail-smtp-service 587)
 (setq message-kill-buffer-on-exit t)
 
