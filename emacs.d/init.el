@@ -188,6 +188,17 @@ useful for alternating between light and dark themes"
   :config
   (helm-projectile-on))
 
+(use-package go-mode
+  :ensure t)
+
+(use-package company-go
+  :ensure t
+  :after (go-mode)
+  :config
+  (add-hook 'go-mode-hook
+            (lambda ()
+              (set (make-local-variable 'company-backends) '(company-go)))))
+
 (require 'mu4e)
 (setq mu4e-maildir (concat (getenv "HOME") "/.mail"))
 (setq mu4e-drafts-folder "/Drafts")
