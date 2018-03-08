@@ -218,6 +218,7 @@ useful for alternating between light and dark themes"
 (setq mu4e-sent-folder "/Sent")
 (setq mu4e-trash-folder "/Trash")
 (setq mu4e-get-mail-command "offlineimap")
+(setq mu4e-view-show-addresses t)
 
 (setq mu4e-compose-reply-to-address "kevin@kevincotugno.com"
       user-mail-address "kevin@kevincotugno.com"
