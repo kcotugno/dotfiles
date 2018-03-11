@@ -15,6 +15,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/nginx.vim'
 
 call plug#end()
 
