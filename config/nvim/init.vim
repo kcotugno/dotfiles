@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plugins
 Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
 Plug 'kien/ctrlp.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'majutsushi/tagbar'
