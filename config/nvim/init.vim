@@ -120,7 +120,6 @@ let g:ctrlp_show_hidden = 1
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = "start"
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
