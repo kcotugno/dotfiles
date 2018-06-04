@@ -53,7 +53,7 @@
 (setq use-package-always-ensure t)
 
 ;; Display
-(set-default-font "Source Code Pro-12")
+(set-default-font "DejaVu Sans Mono-12")
 (line-number-mode t)
 (global-linum-mode t)
 
