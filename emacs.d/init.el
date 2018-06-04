@@ -151,7 +151,11 @@ useful for alternating between light and dark themes"
 ;; End themes
 
 (use-package org
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+                           (flyspell-mode)
+                           (auto-fill-mode))))
 
 (use-package org-bullets
   :ensure t
