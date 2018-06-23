@@ -1,10 +1,13 @@
-if [[ -n "$(echo $SHELL | grep zsh)" ]]; then
-	export ZSH="$HOME/.oh-my-zsh"
+local oh_my_zsh="$HOME/.oh-my-zsh"
 
-	ZSH_THEME="jispwoso"
+if [[ -d "$oh_my_zsh" ]]; then
+	local theme="jispwoso"
+
+	export ZSH="$oh_my_zsh"
+	export ZSH_THEME="$theme"
 
 	plugins=(git)
-	source "$ZSH/oh-my-zsh.sh"
+	source "$oh_my_zsh/oh-my-zsh.sh"
 fi
 
 if [[ -d "$HOME/devel" ]]; then
@@ -27,24 +30,6 @@ if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
 	export PATH="$GOPATH/bin:$PATH"
 fi
 
-function passgen () {
-	local len="$1"
-	local lower="$2"
-
-	echo "$len" | grep -qE '^[0-9]+$'
-	if (( $? )); then
-		len=32
-	fi
-
-	if [[ "$lower" = "true" ]]; then
-		local tr1="[:upper:]"
-		local tr2="[:lower:]"
-	fi
-
-	cat /dev/urandom | base64 | head -c "$len" | tr -d "\n" | \
-		tr "$tr1" "$tr2" && echo
-}
-
 which nvim &> /dev/null
 neovim="$?"
 
@@ -59,12 +44,27 @@ else
 	export EDITOR="vi"
 fi
 
-if [[ -f "$HOME/.ssh-sentinel.sh" ]]; then
-	source "$HOME/.ssh-sentinel.sh"
-fi
+function passgen () {
+	local len="$1"
+	local lower="$2"
+
+	echo "$len" | grep -qE '^[0-9]+$'
+	if (( $? )); then
+		len=32
+	fi
+
+	local result=`cat /dev/urandom | base64 | tr -d "\n" | head -c "$len"`
+	if [[ "$lower" = "true" ]]; then
+		local tr1="[:upper:]"
+		local tr2="[:lower:]"
+		result=`echo "$result" | tr "$tr1" "$tr2"`
+	fi
+
+	echo -n "$result"
+}
 
 function weather() {
-	loc=$1
+	local loc=$1
 	if [[ -z "$loc" ]]; then
 		loc="Lake Forest, CA"
 	fi
