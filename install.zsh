@@ -2,7 +2,7 @@
 
 set -e
 
-link="ln -sr"
+link="ln -s"
 rm="rm -rf"
 
 function uninstall {
@@ -13,10 +13,10 @@ function uninstall {
 }
 
 function install {
-	eval $link ".emacs.d" "$HOME/.emacs.d"
-	eval $link ".zshrc" "$HOME/.zshrc"
-	eval $link ".tmux.conf" "$HOME/.tmux.conf"
-	eval $link ".config/nvim" "$HOME/.config/nvim"
+	eval $link "$PWD/.emacs.d" "$HOME/.emacs.d"
+	eval $link "$PWD/.zshrc" "$HOME/.zshrc"
+	eval $link "$PWD/.tmux.conf" "$HOME/.tmux.conf"
+	eval $link "$PWD/.config/nvim" "$HOME/.config/nvim"
 }
 
 if [[ "$1" == "uninstall" ]]; then
