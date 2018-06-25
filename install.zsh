@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-set -e
-
 link="ln -s"
 rm="rm -rf"
 
