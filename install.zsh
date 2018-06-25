@@ -10,6 +10,7 @@ function uninstall {
 	eval $rm "$HOME/.emacs.d"
 	eval $rm "$HOME/.tmux.conf"
 	eval $rm "$HOME/.config/nvim"
+	eval $rm "$HOME/.Xresources"
 }
 
 function install {
@@ -17,6 +18,13 @@ function install {
 	eval $link "$PWD/.zshrc" "$HOME/.zshrc"
 	eval $link "$PWD/.tmux.conf" "$HOME/.tmux.conf"
 	eval $link "$PWD/.config/nvim" "$HOME/.config/nvim"
+
+	which xrdb &> /dev/null
+	xrdb_exists=$?
+	if (( !xrdb_exists )); then
+		eval $link "$PWD/.Xresources" "$HOME/.Xresources"
+		xrdb "$PWD/.Xresources"
+	fi
 }
 
 if [[ "$1" == "uninstall" ]]; then
