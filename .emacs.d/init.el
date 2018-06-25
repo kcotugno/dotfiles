@@ -213,22 +213,25 @@ useful for alternating between light and dark themes"
   (when (file-exists-p cargo-bin)
     (add-to-list 'exec-path cargo-bin)))
 
-(require 'mu4e)
-(setq mu4e-maildir (concat (getenv "HOME") "/.mail"))
-(setq mu4e-drafts-folder "/Drafts")
-(setq mu4e-sent-folder "/Sent")
-(setq mu4e-trash-folder "/Trash")
-(setq mu4e-get-mail-command "offlineimap")
-(setq mu4e-view-show-addresses t)
+(global-unset-key (kbd "C-x m")) ; We don't want the default compose-mail
+(when (require 'mu4e nil t)
+  (setq mu4e-maildir (concat (getenv "HOME") "/.mail"))
+  (setq mu4e-drafts-folder "/Drafts")
+  (setq mu4e-sent-folder "/Sent")
+  (setq mu4e-trash-folder "/Trash")
+  (setq mu4e-get-mail-command "offlineimap")
+  (setq mu4e-view-show-addresses t)
+  (global-set-key (kbd "C-x m") 'mu4e)
 
-(setq mu4e-compose-reply-to-address "kevin@kevincotugno.com"
-      user-mail-address "kevin@kevincotugno.com"
-      user-full-name "Kevin Cotugno")
-(setq
- message-send-mail-function 'smtpmail-send-it
- smtpmail-smtp-server "smtp.cotugno.family"
- smtpmail-stream-type 'starttls
- smtpmail-smtp-service 587)
-(setq message-kill-buffer-on-exit t)
+  (setq mu4e-compose-reply-to-address "kevin@kevincotugno.com"
+        user-mail-address "kevin@kevincotugno.com"
+        user-full-name "Kevin Cotugno")
+  (setq
+   message-send-mail-function 'smtpmail-send-it
+   smtpmail-smtp-server "smtp.cotugno.family"
+   smtpmail-stream-type 'starttls
+   smtpmail-smtp-service 587)
+  (setq message-kill-buffer-on-exit t))
+
 
 ;; End Plugins
