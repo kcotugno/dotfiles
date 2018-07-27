@@ -40,6 +40,7 @@ endfunction
 call SetWhitespace()
 map <F5> :ToggleBG<CR> :call SetWhitespace()<CR>
 
+set spell
 set number
 set nowrap
 filetype plugin indent on
