@@ -1,21 +1,42 @@
 #!/usr/bin/env zsh
 
+## TODO walk the file tree instead of manually linking files
+
 link="ln -s"
 rm="rm -rf"
 
+emacs_dir="$HOME/.emacs.d"
+nvim_dir="$HOME/.config/nvim"
+
+function create_directories {
+	if [[ ! -d "$emacs_dir" ]]; then
+		mkdir "$emacs_dir"
+	fi
+
+	if [[ ! -d "$nvim_dir" ]]; then
+		mkdir "$nvim_dir"
+	fi
+}
+
 function uninstall {
 	eval $rm "$HOME/.zshrc"
-	eval $rm "$HOME/.emacs.d"
+	eval $rm "$emacs_dir/init.el"
+	eval $rm "$emacs_dir/themes"
 	eval $rm "$HOME/.tmux.conf"
-	eval $rm "$HOME/.config/nvim"
+	eval $rm "$nvim_dir/autoload"
+	eval $rm "$nvim_dir/init.vim"
 	eval $rm "$HOME/.Xresources"
 }
 
 function install {
-	eval $link "$PWD/.emacs.d" "$HOME/.emacs.d"
+	create_directories
+
+	eval $link "$PWD/.emacs.d/init.el" "$emacs_dir/init.el"
+	eval $link "$PWD/.emacs.d/themes/" "$emacs_dir/themes"
 	eval $link "$PWD/.zshrc" "$HOME/.zshrc"
 	eval $link "$PWD/.tmux.conf" "$HOME/.tmux.conf"
-	eval $link "$PWD/.config/nvim" "$HOME/.config/nvim"
+	eval $link "$PWD/.config/nvim/autoload" "$nvim_dir/autoload"
+	eval $link "$PWD/.config/nvim/init.vim" "$nvim_dir/init.vim"
 
 	which xrdb &> /dev/null
 	xrdb_exists=$?
