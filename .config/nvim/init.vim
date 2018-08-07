@@ -122,6 +122,9 @@ let g:ctrlp_show_hidden = 1
 " NERD Commenter
 let g:NERDSpaceDelims = 1
 
+" NERD Tree
+let g:NERDTreeShowHidden = 1
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
