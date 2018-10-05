@@ -5,7 +5,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
-Plug 'kien/ctrlp.vim'
+Plug 'gabesoft/vim-ags'
+Plug 'junegunn/fzf'
 Plug 'kchmck/vim-coffee-script'
 Plug 'majutsushi/tagbar'
 Plug 'posva/vim-vue'
@@ -115,9 +116,12 @@ nmap <leader>tm :tabmove<CR>
 nmap <leader>h :noh<CR>
 
 " Plugin configuration
-" ctrlp
-let g:ctrlp_custom_ignore = '\v(node_modules|\.git|tmp)$'
-let g:ctrlp_show_hidden = 1
+
+" The Silver Searcher
+nmap <leader>s :Ags<space>
+
+" FZF
+nmap <C-p> :FZF!<CR>
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1
