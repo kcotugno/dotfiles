@@ -16,6 +16,10 @@ else
 	export DEVPATH="$HOME"
 fi
 
+if [[ -z "$USER" ]]; then
+	export USER=$(whoami)
+fi
+
 if [[ -d "$DEVPATH/android/android-sdk" ]]; then
 	export ANDROID_SDK="$DEVPATH/android/android-sdk"
 fi
