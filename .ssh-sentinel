@@ -22,5 +22,11 @@ if [[ -e $file ]]; then
 	fi
 fi
 
-export `ssh-agent -s | grep -oP "^.+(?=; export)" | tee "$file"`
+export $(ssh-agent -s |
+	awk '{
+		if ($1 ~ ".*=.*;") {
+			print substr($1, 0, length($1) - 1)
+		}
+	}' |
+	tee "$file")
 chmod 600 "$file"
