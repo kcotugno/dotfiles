@@ -14,7 +14,7 @@ if [[ -e $file ]]; then
 	pidenv=`cat $file | grep SSH_AGENT_PID`
 	pid=`printf "$pidenv" | grep -o "[0-9]*"`
 
-	ps --pid "$pid" &> /dev/null
+	kill -0 "$pid" &> /dev/null
 	if (( ! $? )); then
 		export "$sockenv"
 		export "$pidenv"
