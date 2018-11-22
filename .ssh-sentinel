@@ -1,0 +1,26 @@
+file="$HOME/.ssh-agent"
+
+which ssh-agent &> /dev/null
+if (( $? )); then
+	exit 1
+fi
+
+if [[ -n "$SSH_AUTH_SOCK" ]] && [[ -n "$SSH_AGENT_PID" ]]; then
+	return
+fi
+
+if [[ -e $file ]]; then
+	sockenv=`cat $file | grep SSH_AUTH_SOCK`
+	pidenv=`cat $file | grep SSH_AGENT_PID`
+	pid=`printf "$pidenv" | grep -o "[0-9]*"`
+
+	ps --pid "$pid" &> /dev/null
+	if (( ! $? )); then
+		export "$sockenv"
+		export "$pidenv"
+		return
+	fi
+fi
+
+export `ssh-agent -s | grep -oP "^.+(?=; export)" | tee "$file"`
+chmod 600 "$file"

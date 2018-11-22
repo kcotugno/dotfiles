@@ -1,4 +1,5 @@
 local oh_my_zsh="$HOME/.oh-my-zsh"
+source $HOME/.ssh-sentinel
 
 if [[ -d "$oh_my_zsh" ]]; then
 	local theme="jispwoso"
@@ -47,6 +48,7 @@ elif (( !$vim )); then
 else
 	export EDITOR="vi"
 fi
+
 
 function passgen () {
 	local len="$1"

@@ -26,6 +26,7 @@ function uninstall {
 	eval $rm "$nvim_dir/autoload"
 	eval $rm "$nvim_dir/init.vim"
 	eval $rm "$HOME/.Xresources"
+	eval $rm "$HOME/.ssh-sentinel"
 }
 
 function install {
@@ -35,6 +36,7 @@ function install {
 	eval $link "$PWD/.emacs.d/themes/" "$emacs_dir/themes"
 	eval $link "$PWD/.zshrc" "$HOME/.zshrc"
 	eval $link "$PWD/.tmux.conf" "$HOME/.tmux.conf"
+	eval $link "$PWD/.ssh-sentinel" "$HOME/.ssh-sentinel"
 	eval $link "$PWD/.config/nvim/autoload" "$nvim_dir/autoload"
 	eval $link "$PWD/.config/nvim/init.vim" "$nvim_dir/init.vim"
 
