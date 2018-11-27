@@ -3,3 +3,4 @@
 .emacs.d/elpa
 .emacs.d/projectile-bookmarks.eld
 .config/nvim/plugged
+*.old
