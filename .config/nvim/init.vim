@@ -22,6 +22,7 @@ call plug#end()
 
 " vim-plug---END
 
+
 " Solarized
 syntax enable
 set background=dark
@@ -51,8 +52,23 @@ set mouse=a
 set list
 set listchars=tab:――,space:·,trail:·
 
-autocmd BufRead,BufNewFile *.cs,*.java set tabstop=4 shiftwidth=4 expandtab
-autocmd BufRead,BufNewFile *.rb,*.css,*.js,*.jsx,*.coffee,*.erb,*.html,*.json,*.vue set tabstop=2 shiftwidth=2 expandtab
+autocmd BufRead,BufNewFile
+			\ *.cs,
+			\*.java
+			\ set tabstop=4 shiftwidth=4 expandtab
+
+autocmd BufRead,BufNewFile
+			\ *.rb,
+			\*.css,
+			\*.js,
+			\*.jsx,
+			\*.coffee,
+			\*.erb,
+			\*.html,
+			\*.json,
+			\*.vue
+			\ set tabstop=2 shiftwidth=2 expandtab
+
 autocmd FileType crontab set backupcopy=yes
 
 function TrimTrailingInvisibles()
@@ -70,7 +86,16 @@ endfunction
 augroup maximus
 
 autocmd BufWrite * call TrimTrailingInvisibles() | call TrimTrailingLines()
-autocmd BufLeave * if &buftype == '' && !&readonly && &modifiable && &modified && expand("%:t") != "" | call TrimTrailingInvisibles() | call TrimTrailingLines() | w | GitGutter | endif
+autocmd BufLeave * if &buftype == ''
+			\ && !&readonly
+			\ && &modifiable
+			\ && &modified
+			\ && expand("%:t") != ""
+			\ | call TrimTrailingInvisibles()
+			\ | call TrimTrailingLines()
+			\ | w
+			\ | GitGutter
+			\ | endif
 
 augroup END
 
