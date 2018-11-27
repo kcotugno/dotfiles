@@ -66,7 +66,9 @@ autocmd BufRead,BufNewFile
 			\*.erb,
 			\*.html,
 			\*.json,
-			\*.vue
+			\*.vue,
+			\*.yml,
+			\*.yaml
 			\ set tabstop=2 shiftwidth=2 expandtab
 
 autocmd FileType crontab set backupcopy=yes
