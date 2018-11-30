@@ -35,6 +35,10 @@ if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
 	export PATH="$GOPATH/bin:$PATH"
 fi
 
+if [[ -d "$HOME/.cargo" ]]; then
+	export PATH=$HOME/.cargo/bin:$PATH
+fi
+
 which nvim &> /dev/null
 neovim="$?"
 
