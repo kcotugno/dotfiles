@@ -141,6 +141,34 @@ nmap <leader>tm :tabmove<CR>
 
 " Misc
 nmap <leader>h :noh<CR>
+nnoremap <leader><space> :call Fullscreen()<CR>
+
+function Fullscreen()
+	let view = winsaveview()
+	let buf = winbufnr(0)
+	let found = 0
+
+	for b in win_findbuf(buf)
+		let tabwin = win_id2tabwin(b)
+		if gettabwinvar(tabwin[0], tabwin[1], "fullscreen_buf") == buf
+			let found = 1
+			let existing_tab = tabwin[0]
+			let existing_win = tabwin[1]
+		endif
+	endfor
+	if found == 1
+		if existing_tab == tabpagenr()
+			tabclose
+		else
+			exec "tabnext".existing_tab
+		endif
+	else
+		exec "tabnew +buffer".buf
+		let w:fullscreen_buf = buf
+	end
+
+	call winrestview(view)
+endfunction
 
 " Plugin configuration
 
