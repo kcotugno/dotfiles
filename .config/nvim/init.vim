@@ -52,6 +52,8 @@ set mouse=a
 set list
 set listchars=tab:――,space:·,trail:·
 
+let g:NoClean = ["diff"]
+
 autocmd BufRead,BufNewFile
 			\ *.cs,
 			\*.java
@@ -105,6 +107,7 @@ endfunction
 
 function Writeable()
 	return &buftype == ''
+				\ && index(g:NoClean, &filetype) == -1
 				\ && !&readonly
 				\ && &modifiable
 				\ && &modified
