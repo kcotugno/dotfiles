@@ -149,18 +149,18 @@ endfunction
 
 " Shortcuts
 " Plugins
-nmap <C-\> :NERDTreeToggle<CR>
-nmap <leader>. :TagbarToggle<CR>
+nnoremap <C-\> :NERDTreeToggle<CR>
+nnoremap <leader>. :TagbarToggle<CR>
 
 " Tabs
-nmap <leader>tt :tabnew<CR>
-nmap <leader>tn :tabnext<CR>
-nmap <leader>tp :tabprevious<CR>
-nmap <leader>tc :tabclose<CR>
-nmap <leader>tm :tabmove<CR>
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <leader>tn :tabnext<CR>
+nnoremap <leader>tp :tabprevious<CR>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>tm :tabmove<CR>
 
 " Misc
-nmap <leader>h :noh<CR>
+nnoremap <leader>h :noh<CR>
 nnoremap <leader><space> :call Fullscreen()<CR>
 
 function Fullscreen()
@@ -193,10 +193,10 @@ endfunction
 " Plugin configuration
 
 " The Silver Searcher
-nmap <leader>s :Ags<space>
+nnoremap <leader>s :Ags<space>
 
 " FZF
-nmap <C-p> :FZF!<CR>
+nnoremap <C-p> :FZF!<CR>
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1
