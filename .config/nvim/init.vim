@@ -85,19 +85,36 @@ function TrimTrailingLines()
   call winrestview(view)
 endfunction
 
+function OnWrite()
+	if Writeable()
+		call CleanFile()
+	endif
+endfunction
+
+function OnLeave()
+	if Writeable()
+		call CleanFile()
+		write
+		GitGutter
+	endif
+endfunction
+
+function CleanFile()
+	call TrimTrailingInvisibles() | call TrimTrailingLines()
+endfunction
+
+function Writeable()
+	return &buftype == ''
+				\ && !&readonly
+				\ && &modifiable
+				\ && &modified
+				\ && expand("%:t") != ""
+endfunction
+
 augroup maximus
 
-autocmd BufWrite * call TrimTrailingInvisibles() | call TrimTrailingLines()
-autocmd BufLeave * if &buftype == ''
-			\ && !&readonly
-			\ && &modifiable
-			\ && &modified
-			\ && expand("%:t") != ""
-			\ | call TrimTrailingInvisibles()
-			\ | call TrimTrailingLines()
-			\ | w
-			\ | GitGutter
-			\ | endif
+autocmd BufWrite * call OnWrite()
+autocmd BufLeave * call OnLeave()
 
 augroup END
 
