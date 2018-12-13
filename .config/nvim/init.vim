@@ -161,6 +161,7 @@ nnoremap <leader>tm :tabmove<CR>
 
 " Misc
 nnoremap <leader>h :noh<CR>
+nnoremap <C-]> :exec "tjump ".expand("<cword>")<CR>
 nnoremap <leader><space> :call Fullscreen()<CR>
 
 function Fullscreen()
