@@ -4,8 +4,10 @@ call plug#begin('~/.config/nvim/plugged')
 " Plugins
 Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
+Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go'
 Plug 'gabesoft/vim-ags'
+Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf'
 Plug 'kchmck/vim-coffee-script'
 Plug 'majutsushi/tagbar'
