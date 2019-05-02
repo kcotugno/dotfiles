@@ -76,10 +76,10 @@ function passgen () {
 function weather() {
 	local loc=$1
 	if [[ -z "$loc" ]]; then
-		loc="Lake Forest, CA"
+		loc="Phoenix, AZ"
 	fi
 
-	curl -sSL "wttr.in/$loc?m"
+	curl -sSL "wttr.in/$loc?"
 }
 
 alias e="$EDITOR"
