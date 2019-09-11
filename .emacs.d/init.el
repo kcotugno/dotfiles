@@ -2,8 +2,6 @@
 ;;
 ;; Emacs Configuration
 ;;
-;; Author: Kevin Cotugno git@kevincotugno.com
-;; Date: 2/22/17
 
 ;; Package
 (require 'package)
