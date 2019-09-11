@@ -51,7 +51,6 @@ else
 	export EDITOR="vi"
 fi
 
-
 function passgen () {
 	local len="$1"
 	local lower="$2"
