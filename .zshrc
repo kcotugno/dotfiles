@@ -21,14 +21,6 @@ if [[ -z "$USER" ]]; then
 	export USER=$(whoami)
 fi
 
-if [[ -d "$DEVPATH/android/android-sdk" ]]; then
-	export ANDROID_SDK="$DEVPATH/android/android-sdk"
-fi
-
-if [[ -d "$DEVPATH/android/android-ndk" ]]; then
-	export ANDROID_NDK="$DEVPATH/android/android-ndk"
-fi
-
 which go &> /dev/null
 if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
 	export GOPATH="$DEVPATH/go"
