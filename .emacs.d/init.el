@@ -48,7 +48,8 @@
 (setq use-package-always-ensure t)
 
 ;; Display
-(set-default-font "DejaVu Sans Mono-12")
+(unless (eq system-type 'windows-nt)
+  (set-default-font "DejaVu Sans Mono-12"))
 (line-number-mode t)
 (global-linum-mode t)
 
