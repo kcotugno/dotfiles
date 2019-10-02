@@ -51,6 +51,10 @@ else
 	export EDITOR="vi"
 fi
 
+if [[ -f "$HOME/work.zsh" ]]; then
+	source "$HOME/work.zsh"
+fi
+
 function passgen () {
 	local len="$1"
 	local lower="$2"
