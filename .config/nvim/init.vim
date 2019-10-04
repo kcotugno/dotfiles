@@ -5,6 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
+Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'gabesoft/vim-ags'
 Plug 'hashivim/vim-terraform'
