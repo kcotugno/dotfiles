@@ -6,6 +6,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 
 	export ZSH="$oh_my_zsh"
 	export ZSH_THEME="$theme"
+	export DISABLE_UPDATE_PROMPT=true
 
 	plugins=(git)
 	source "$oh_my_zsh/oh-my-zsh.sh"
