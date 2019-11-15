@@ -32,10 +32,9 @@ if [[ -d "$HOME/.cargo" ]]; then
 	export PATH=$HOME/.cargo/bin:$PATH
 fi
 
-if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-	source "$HOME/.rvm/scripts/rvm"
-elif [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
-	source "/usr/local/rvm/scripts/rvm"
+which rbenv &> /dev/null
+if (( !$? )); then
+	eval "$(rbenv init -)"
 fi
 
 which nvim &> /dev/null
