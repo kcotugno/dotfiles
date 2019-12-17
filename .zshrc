@@ -1,5 +1,4 @@
 local oh_my_zsh="$HOME/.oh-my-zsh"
-source $HOME/.ssh-sentinel
 
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	local theme="jispwoso"
