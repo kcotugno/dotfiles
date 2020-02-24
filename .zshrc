@@ -19,7 +19,8 @@ else
 fi
 
 if [[ -z "$USER" ]]; then
-	export USER=$(whoami)
+	USER=$(whoami)
+	export USER
 fi
 
 which go &> /dev/null
