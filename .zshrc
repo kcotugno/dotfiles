@@ -1,7 +1,6 @@
-local oh_my_zsh="$HOME/.oh-my-zsh"
+oh_my_zsh="$HOME/.oh-my-zsh"
 
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
-	local theme="jispwoso"
 
 	export ZSH="$oh_my_zsh"
 	export ZSH_THEME="$theme"
