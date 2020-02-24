@@ -23,8 +23,7 @@ if [[ -z "$USER" ]]; then
 	export USER
 fi
 
-which go &> /dev/null
-if (( !$? )) && [[ -d "$DEVPATH/go" ]]; then
+if [ $(command -v go) ] && [[ -d "$DEVPATH/go" ]]; then
 	export GOPATH="$DEVPATH/go"
 	export PATH="$GOPATH/bin:$PATH"
 fi
@@ -38,15 +37,9 @@ if (( !$? )); then
 	eval "$(rbenv init -)"
 fi
 
-which nvim &> /dev/null
-neovim="$?"
-
-which vim &> /dev/null
-vim="$?"
-
-if (( !$neovim )); then
+if [[ $(command -v nvim) ]]; then
 	export EDITOR="nvim"
-elif (( !$vim )); then
+elif [ $(command -v vim) ]; then
 	export EDITOR="vim"
 else
 	export EDITOR="vi"
@@ -84,7 +77,7 @@ function weather() {
 	curl -sSL "wttr.in/$loc?"
 }
 
-alias e="$EDITOR"
+alias e='$EDITOR'
 alias s="du -sh"
 
 alias tmux="tmux -2"
