@@ -6,7 +6,9 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export ZSH_THEME="$theme"
 	export DISABLE_UPDATE_PROMPT=true
 
-	plugins=(git)
+	export ZSH_TMUX_AUTOSTART=true
+
+	export plugins=(git tmux)
 	source "$oh_my_zsh/oh-my-zsh.sh"
 fi
 
