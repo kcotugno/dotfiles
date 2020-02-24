@@ -49,25 +49,6 @@ if [[ -f "$HOME/work.zsh" ]]; then
 	source "$HOME/work.zsh"
 fi
 
-function passgen () {
-	local len="$1"
-	local lower="$2"
-
-	echo "$len" | grep -qE '^[0-9]+$'
-	if (( $? )); then
-		len=32
-	fi
-
-	local result=`cat /dev/urandom | base64 | tr -d "\n" | head -c "$len"`
-	if [[ "$lower" = "true" ]]; then
-		local tr1="[:upper:]"
-		local tr2="[:lower:]"
-		result=`echo "$result" | tr "$tr1" "$tr2"`
-	fi
-
-	echo -n "$result"
-}
-
 function weather() {
 	local loc=$1
 	if [[ -z "$loc" ]]; then
