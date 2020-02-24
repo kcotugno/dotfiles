@@ -12,6 +12,8 @@ fi
 
 if [[ -d "$HOME/devel" ]]; then
 	export DEVPATH="$HOME/devel"
+elif [[ -d "$HOME/workspace" ]]; then
+	export DEVPATH="$HOME/workspace"
 else
 	export DEVPATH="$HOME"
 fi
