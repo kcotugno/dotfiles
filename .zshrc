@@ -32,8 +32,8 @@ if [[ -d "$HOME/.cargo" ]]; then
 	export PATH=$HOME/.cargo/bin:$PATH
 fi
 
-which rbenv &> /dev/null
-if (( !$? )); then
+if [[ -d "$HOME/.rbenv" ]]; then
+	export PATH="$HOME/.rbenv/bin:$PATH"
 	eval "$(rbenv init -)"
 fi
 
