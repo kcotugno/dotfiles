@@ -2,7 +2,6 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Plugins
-Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'vim-scripts/nginx.vim'
@@ -12,6 +11,7 @@ Plug 'gabesoft/vim-ags'
 Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf'
 Plug 'kchmck/vim-coffee-script'
+Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
 Plug 'posva/vim-vue'
 Plug 'scrooloose/nerdcommenter'
@@ -28,22 +28,23 @@ call plug#end()
 
 " Solarized
 syntax enable
-set background=dark
-colorscheme solarized
+set termguicolors
+colorscheme solarized8
 set cursorline
 set colorcolumn=80,100
-call togglebg#map("")
 
-function SetWhitespace()
-  if &background == 'dark'
-    hi Whitespace ctermfg=0
+function ToggleBackground(current)
+  if a:current == 'dark'
+    set background=light
+    hi Whitespace ctermfg=7 guifg=#eee8d5
   else
-    hi Whitespace ctermfg=7
+    set background=dark
+    hi Whitespace ctermfg=0 guifg=#073642
   end
 endfunction
 
-call SetWhitespace()
-map <F5> :ToggleBG<CR> :call SetWhitespace()<CR>
+call ToggleBackground("light")
+nmap <F5> :call ToggleBackground(&background)<CR>
 
 set spell
 set number
