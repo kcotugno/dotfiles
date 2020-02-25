@@ -3,10 +3,12 @@ oh_my_zsh="$HOME/.oh-my-zsh"
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 
 	export ZSH="$oh_my_zsh"
-	export ZSH_THEME="random"
 	export DISABLE_UPDATE_PROMPT=true
-
 	export ZSH_TMUX_AUTOSTART=true
+
+	if (( !${+ZSH_THEME} )); then
+		export ZSH_THEME="random"
+	fi
 
 	export plugins=(git tmux)
 	source "$oh_my_zsh/oh-my-zsh.sh"
