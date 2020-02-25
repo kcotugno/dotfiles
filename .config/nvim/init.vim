@@ -20,6 +20,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
+Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 
@@ -212,6 +213,13 @@ let g:NERDTreeShowHidden = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
+
+" syntastic
+let g:syntastic_vim_checkers = ["vint"]
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Tagbar
 let g:tagbar_type_go = {
