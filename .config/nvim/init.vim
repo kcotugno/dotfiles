@@ -1,5 +1,8 @@
+scriptencoding utf-8
+
 " vim-plug---START
 call plug#begin('~/.config/nvim/plugged')
+
 
 " Plugins
 Plug 'airblade/vim-gitgutter'
@@ -35,7 +38,7 @@ set cursorline
 set colorcolumn=80,100
 
 function ToggleBackground(current)
-  if a:current == 'dark'
+  if a:current ==# 'dark'
     set background=light
     hi Whitespace ctermfg=7 guifg=#eee8d5
   else
@@ -44,7 +47,7 @@ function ToggleBackground(current)
   end
 endfunction
 
-call ToggleBackground("light")
+call ToggleBackground('light')
 nmap <F5> :call ToggleBackground(&background)<CR>
 
 set spell
@@ -57,8 +60,9 @@ set mouse=a
 set list
 set listchars=tab:――,space:·,trail:·
 
-let g:NoClean = ["diff"]
+let g:NoClean = ['diff']
 
+augroup filetypes
 autocmd BufRead,BufNewFile
 			\ *.cs,
 			\*.java
@@ -80,6 +84,10 @@ autocmd BufRead,BufNewFile
 
 autocmd FileType crontab set backupcopy=yes
 
+augroup END
+
+" vint: -ProhibitCommandRelyOnUser -ProhibitCommandWithUnintendedSideEffect
+
 function TrimTrailingInvisibles()
   let view = winsaveview()
   %s/\s\+$//e
@@ -91,6 +99,8 @@ function TrimTrailingLines()
   %s/\n\+\%$//e
   call winrestview(view)
 endfunction
+
+" vint: +ProhibitCommandRelyOnUser +ProhibitCommandWithUnintendedSideEffect
 
 function OnWrite()
 	if Writeable()
@@ -111,12 +121,12 @@ function CleanFile()
 endfunction
 
 function Writeable()
-	return &buftype == ''
+	return empty(&buftype)
 				\ && index(g:NoClean, &filetype) == -1
 				\ && !&readonly
 				\ && &modifiable
 				\ && &modified
-				\ && expand("%:t") != ""
+				\ && !empty(expand('%:t'))
 endfunction
 
 augroup maximus
@@ -140,15 +150,15 @@ function ModifiedSym()
   if &modified
     return "[\u270f]"
   else
-    return ""
+    return ''
   end
 endfunction
 
 function AddGitGutterToStatusline()
-  if &buftype == '' && exists("b:gitgutter_summary")
-    return join(["[Git:", join(b:gitgutter_summary, ","), "]"], "")
+  if empty(&buftype) && exists('b:gitgutter_summary')
+    return join(['[Git:', join(b:gitgutter_summary, ','), ']'], '')
   else
-    return ""
+    return ''
   endif
 endfunction
 
@@ -176,7 +186,7 @@ function Fullscreen()
 
 	for b in win_findbuf(buf)
 		let tabwin = win_id2tabwin(b)
-		if gettabwinvar(tabwin[0], tabwin[1], "fullscreen_buf") == buf
+		if gettabwinvar(tabwin[0], tabwin[1], 'fullscreen_buf') == buf
 			let found = 1
 			let existing_tab = tabwin[0]
 			let existing_win = tabwin[1]
@@ -186,10 +196,10 @@ function Fullscreen()
 		if existing_tab == tabpagenr()
 			tabclose
 		else
-			exec "tabnext".existing_tab
+			exec 'tabnext'.existing_tab
 		endif
 	else
-		exec "tabnew +buffer".buf
+		exec 'tabnew +buffer'.buf
 		let w:fullscreen_buf = buf
 	end
 
@@ -215,7 +225,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 
 " syntastic
-let g:syntastic_vim_checkers = ["vint"]
+let g:syntastic_vim_checkers = ['vint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
