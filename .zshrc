@@ -7,7 +7,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export ZSH_TMUX_AUTOSTART=true
 
 	if (( !${+ZSH_THEME} )); then
-		export ZSH_THEME="random"
+		export ZSH_THEME="simple"
 	fi
 
 	export plugins=(
