@@ -58,6 +58,10 @@ if [[ -f "$HOME/work.zsh" ]]; then
 	source "$HOME/work.zsh"
 fi
 
+if [[ $(command -v fzf) && $(command -v fd) ]]; then
+	export FZF_DEFAULT_COMMAND="fd --type f --hidden --no-ignore --follow --exclude .git"
+fi
+
 function weather() {
 	local loc=$1
 	if [[ -z "$loc" ]]; then
