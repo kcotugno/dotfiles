@@ -10,7 +10,12 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		export ZSH_THEME="random"
 	fi
 
-	export plugins=(git tmux)
+	export plugins=(
+		fzf
+		git
+		tmux
+	)
+
 	source "$oh_my_zsh/oh-my-zsh.sh"
 fi
 
