@@ -1,9 +1,8 @@
 oh_my_zsh="$HOME/.oh-my-zsh"
 
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
-
 	export ZSH="$oh_my_zsh"
-	export DISABLE_UPDATE_PROMPT=true
+	export DISABLE_AUTO_UPDATE=true
 	export ZSH_TMUX_AUTOSTART=true
 
 	if (( !${+ZSH_THEME} )); then
