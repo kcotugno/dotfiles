@@ -49,7 +49,8 @@
 
 ;; Display
 (unless (eq system-type 'windows-nt)
-  (set-default-font "DejaVu Sans Mono-12"))
+  (add-to-list 'default-frame-alist
+	       '(font . "DejaVu Sans Mono-12")))
 (line-number-mode t)
 (global-linum-mode t)
 
@@ -93,6 +94,9 @@
 (add-hook 'js-mode-hook (lambda ()
                           (setq indent-tabs-mode nil)
                           (setq js-indent-level 2)))
+(add-hook 'html-mode-hook (lambda ()
+                            (setq indent-tabs-mode nil)
+                            (setq html-indent-level 2)))
 (add-hook 'css-mode-hook (lambda ()
                            (setq indent-tabs-mode nil)
                            (setq tab-width 2)
