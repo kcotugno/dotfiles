@@ -3,7 +3,8 @@ oh_my_zsh="$HOME/.oh-my-zsh"
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export ZSH="$oh_my_zsh"
 	export DISABLE_AUTO_UPDATE=true
-	export ZSH_TMUX_AUTOSTART=true
+
+	if [[ ! -v "ZSH_TMUX_AUTOSTART" ]]; then export ZSH_TMUX_AUTOSTART=true; fi
 
 	if (( !${+ZSH_THEME} )); then
 		export ZSH_THEME="simple"
