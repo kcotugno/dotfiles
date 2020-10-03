@@ -46,6 +46,12 @@ if [[ -d "$HOME/.rbenv" ]]; then
 	eval "$(rbenv init -)"
 fi
 
+if [[ -d "$HOME/.nvm" ]]; then
+	export NVM_DIR="$HOME/.nvm"
+
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+
 if [[ $(command -v nvim) ]]; then
 	export EDITOR="nvim"
 elif [ $(command -v vim) ]; then
