@@ -77,6 +77,8 @@ autocmd BufRead,BufNewFile
 			\*.erb,
 			\*.html,
 			\*.json,
+			\*.tf,
+			\*.tfvars,
 			\*.vue,
 			\*.yml,
 			\*.yaml
