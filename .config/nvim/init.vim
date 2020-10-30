@@ -234,7 +234,18 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nnoremap <leader>y :SyntasticToggleMode<CR>
+function ToggleSyntastic()
+	if !exists('b:syntastic_mode') || b:syntastic_mode == 'active'
+		let b:syntastic_mode = 'passive'
+		exec 'SyntasticReset'
+	else
+		let b:syntastic_mode = 'active'
+		exec 'SyntasticCheck'
+	end
+
+endfunction
+
+nnoremap <leader>y :call ToggleSyntastic()<CR>
 
 " Tagbar
 let g:tagbar_type_go = {
