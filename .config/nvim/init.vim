@@ -62,27 +62,36 @@ set listchars=tab:――,space:·,trail:·
 
 let g:NoClean = ['diff']
 
-augroup filetypes
-autocmd BufRead,BufNewFile
-			\ *.cs,
-			\*.java
-			\ set tabstop=4 shiftwidth=4 expandtab
+augroup indentation
+	autocmd BufRead,BufNewFile
+				\ Makefile,
+				\*.c,
+				\*.cpp,
+				\*.go
+				\ set tabstop=8 shiftwidth=8 noexpandtab
 
-autocmd BufRead,BufNewFile
-			\ *.rb,
-			\*.css,
-			\*.js,
-			\*.jsx,
-			\*.coffee,
-			\*.erb,
-			\*.html,
-			\*.json,
-			\*.tf,
-			\*.tfvars,
-			\*.vue,
-			\*.yml,
-			\*.yaml
-			\ set tabstop=2 shiftwidth=2 expandtab
+
+	autocmd BufRead,BufNewFile
+				\ *.cs,
+				\*.java
+				\ set tabstop=4 shiftwidth=4 expandtab
+
+	autocmd BufRead,BufNewFile
+				\ *.rb,
+				\*.css,
+				\*.js,
+				\*.jsx,
+				\*.coffee,
+				\*.erb,
+				\*.html,
+				\*.html.tmpl,
+				\*.json,
+				\*.tf,
+				\*.tfvars,
+				\*.vue,
+				\*.yml,
+				\*.yaml
+				\ set tabstop=2 shiftwidth=2 expandtab
 
 autocmd FileType crontab set backupcopy=yes
 
