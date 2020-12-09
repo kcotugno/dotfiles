@@ -32,7 +32,7 @@ if [[ -z "$USER" ]]; then
 	export USER
 fi
 
-if [ $(command -v go) ] && [[ -d "$DEVPATH/go" ]]; then
+if [[ $(command -v go) ]]; then
 	export GOPATH="$DEVPATH/go"
 	export PATH="$GOPATH/bin:$PATH"
 fi
