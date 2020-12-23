@@ -62,9 +62,7 @@ fi
 
 if [[ $(command -v uname) ]] && uname -r | grep -iq microsoft-standard; then source "$HOME/.wsl.zsh"; fi
 
-if [[ -f "$HOME/work.zsh" ]]; then
-	source "$HOME/work.zsh"
-fi
+if [[ -f "$HOME/.work.zsh" ]]; then source "$HOME/.work.zsh"; fi
 
 if [[ $(command -v fzf) && $(command -v fd) ]]; then
 	export FZF_DEFAULT_COMMAND="fd --type f --hidden --no-ignore --follow --exclude .git"
