@@ -8,7 +8,7 @@ font:
   normal:
     family: Hack
     style: Regular
-  size: 12.0
+  size: 10.0
 
 # Base16 Solarized Dark 256 - alacritty color config
 # Ethan Schoonover (modified by aramisgithub)
