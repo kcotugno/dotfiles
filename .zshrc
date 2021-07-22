@@ -19,12 +19,11 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	source "$oh_my_zsh/oh-my-zsh.sh"
 fi
 
-if [[ -d "$HOME/devel" ]]; then
-	export DEVPATH="$HOME/devel"
-elif [[ -d "$HOME/workspace" ]]; then
+if [[ -d "$HOME/workspace" ]]; then
 	export DEVPATH="$HOME/workspace"
 else
-	export DEVPATH="$HOME"
+	mkdir -p "$HOME/devel"
+	export DEVPATH="$HOME/devel"
 fi
 
 if [[ -z "$USER" ]]; then
