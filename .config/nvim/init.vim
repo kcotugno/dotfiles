@@ -13,10 +13,12 @@ Plug 'fatih/vim-go'
 Plug 'gabesoft/vim-ags'
 Plug 'google/protobuf'
 Plug 'hashivim/vim-terraform'
+Plug 'hrsh7th/nvim-compe'
 Plug 'junegunn/fzf'
 Plug 'kchmck/vim-coffee-script'
 Plug 'lifepillar/vim-solarized8'
 Plug 'majutsushi/tagbar'
+Plug 'neovim/nvim-lspconfig'
 Plug 'posva/vim-vue'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -258,3 +260,35 @@ let g:tagbar_type_go = {
 	\ 'ctagsbin'  : 'gotags',
 	\ 'ctagsargs' : '-sort -silent'
 	\ }
+
+lua <<EOF
+vim.o.completeopt = "menuone,noselect"
+require'compe'.setup {
+	enabled = true;
+	autocomplete = true;
+	debug = false;
+	min_length = 1;
+	preselect = 'enable';
+	throttle_time = 80;
+	source_timeout = 200;
+	resolve_timeout = 800;
+	incomplete_delay = 400;
+	max_abbr_width = 100;
+	max_kind_width = 100;
+	max_menu_width = 100;
+	documentation = true;
+	source = {
+		path = true;
+		buffer = true;
+		calc = true;
+		nvim_lsp = true;
+		nvim_lua = true;
+		vsnip = true;
+		luasnip = true;
+	};
+};
+require'lspconfig'.solargraph.setup{
+	bundlerPath = 'bin/bundle';
+	useBundler = true;
+}
+EOF
