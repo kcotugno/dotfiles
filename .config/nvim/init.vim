@@ -23,7 +23,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
-Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 
@@ -230,27 +229,6 @@ let g:NERDSpaceDelims = 1
 
 " NERD Tree
 let g:NERDTreeShowHidden = 1
-
-" syntastic
-let g:syntastic_vim_checkers = ['vint']
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-function ToggleSyntastic()
-	if !exists('b:syntastic_mode') || b:syntastic_mode == 'active'
-		let b:syntastic_mode = 'passive'
-		exec 'SyntasticReset'
-	else
-		let b:syntastic_mode = 'active'
-		exec 'SyntasticCheck'
-	end
-
-endfunction
-
-nnoremap <leader>y :call ToggleSyntastic()<CR>
 
 " Tagbar
 let g:tagbar_type_go = {
