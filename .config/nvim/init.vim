@@ -20,7 +20,6 @@ Plug 'majutsushi/tagbar'
 Plug 'posva/vim-vue'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
@@ -231,10 +230,6 @@ let g:NERDSpaceDelims = 1
 
 " NERD Tree
 let g:NERDTreeShowHidden = 1
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
 
 " syntastic
 let g:syntastic_vim_checkers = ['vint']
