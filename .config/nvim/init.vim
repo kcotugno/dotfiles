@@ -287,6 +287,7 @@ require'compe'.setup {
 		luasnip = true;
 	};
 };
+require'lspconfig'.gopls.setup{}
 require'lspconfig'.solargraph.setup{
 	bundlerPath = 'bin/bundle';
 	useBundler = true;
