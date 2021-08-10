@@ -292,4 +292,5 @@ require'lspconfig'.solargraph.setup{
 	bundlerPath = 'bin/bundle';
 	useBundler = true;
 }
+require'lspconfig'.rust_analyzer.setup{}
 EOF
