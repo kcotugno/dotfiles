@@ -67,6 +67,8 @@ if [[ $(command -v fzf) && $(command -v fd) ]]; then
 	export FZF_DEFAULT_COMMAND="fd --type f --hidden --no-ignore --follow --exclude .git"
 fi
 
+mkdir -p "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
+
 function weather() {
 	local loc=$1
 	if [[ -z "$loc" ]]; then
