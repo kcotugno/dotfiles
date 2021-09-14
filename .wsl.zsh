@@ -8,3 +8,5 @@ alias ssh-keygen=ssh-keygen.exe
 alias ssh-keyscan=ssh-keyscan.exe
 alias ssh=ssh.exe
 alias scp=scp.exe
+
+cd ~
