@@ -9,6 +9,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	fi
 
 	export plugins=(
+		themes
 		fzf
 		git
 	)
