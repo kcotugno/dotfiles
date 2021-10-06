@@ -4,8 +4,6 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export ZSH="$oh_my_zsh"
 	export DISABLE_AUTO_UPDATE=true
 
-	if [[ ! -v "ZSH_TMUX_AUTOSTART" ]]; then export ZSH_TMUX_AUTOSTART=true; fi
-
 	if (( !${+ZSH_THEME} )); then
 		export ZSH_THEME="simple"
 	fi
@@ -13,8 +11,13 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export plugins=(
 		fzf
 		git
-		tmux
 	)
+
+	if [[ $(command -v tmux) ]]; then
+		if [[ ! -v "ZSH_TMUX_AUTOSTART" ]]; then export ZSH_TMUX_AUTOSTART=true; fi
+		plugins+=(tmux)
+	fi
+
 
 	if [[ $(command -v systemctl) ]]; then
 		plugins+=(systemd)
