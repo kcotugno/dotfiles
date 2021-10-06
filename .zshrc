@@ -16,6 +16,10 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		tmux
 	)
 
+	if [[ $(command -v systemctl) ]]; then
+		plugins+=(systemd)
+	fi
+
 	source "$oh_my_zsh/oh-my-zsh.sh"
 fi
 
