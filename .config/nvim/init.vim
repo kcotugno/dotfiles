@@ -13,7 +13,14 @@ Plug 'fatih/vim-go'
 Plug 'gabesoft/vim-ags'
 Plug 'google/protobuf'
 Plug 'hashivim/vim-terraform'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'junegunn/fzf'
 Plug 'kchmck/vim-coffee-script'
 Plug 'lifepillar/vim-solarized8'
@@ -32,7 +39,6 @@ Plug 'tpope/vim-surround'
 call plug#end()
 
 " vim-plug---END
-
 
 " Solarized
 syntax enable
@@ -264,6 +270,8 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 	\ }
 
+set completeopt=menu,menuone,noselect
+
 lua <<EOF
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -291,42 +299,53 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
-vim.o.completeopt = "menuone,noselect"
-require'compe'.setup {
-	enabled = true;
-	autocomplete = true;
-	debug = false;
-	min_length = 1;
-	preselect = 'enable';
-	throttle_time = 80;
-	source_timeout = 200;
-	resolve_timeout = 800;
-	incomplete_delay = 400;
-	max_abbr_width = 100;
-	max_kind_width = 100;
-	max_menu_width = 100;
-	documentation = true;
-	source = {
-		path = true;
-		buffer = true;
-		calc = true;
-		nvim_lsp = true;
-		nvim_lua = true;
-		vsnip = true;
-		luasnip = true;
-	};
-};
+local cmp = require'cmp'
+
+local sources = {
+	{ name = 'nvim_lsp' },
+	{ name = 'nvim_lua' },
+	{ name = 'buffer' },
+}
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			vim.fn["vsnip#anonymous"](args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
+	}),
+	sources = cmp.config.sources(sources),
+})
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 require'lspconfig'.gopls.setup{
-	on_attach = on_attach
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
+
 require'lspconfig'.solargraph.setup{
-	on_attach = on_attach;
-	bundlerPath = 'bin/bundle';
-	useBundler = true;
+	on_attach = on_attach,
+	bundlerPath = 'bin/bundle',
+	useBundler = true,
+	capabilities = capabilities,
 }
+
 require'lspconfig'.rust_analyzer.setup{
-	on_attach = on_attach
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+require'lspconfig'.clangd.setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
 EOF
