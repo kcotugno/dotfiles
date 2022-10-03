@@ -10,7 +10,6 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 
 	export plugins=(
 		themes
-		fzf
 		git
 	)
 
@@ -19,6 +18,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		plugins+=(tmux)
 	fi
 
+	if [[ $(command -v fzf) ]]; then plugins+=(fzf); fi
 
 	if [[ $(command -v systemctl) ]]; then
 		plugins+=(systemd)
