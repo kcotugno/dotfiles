@@ -97,6 +97,7 @@ function proj {
 
 alias e='$EDITOR'
 alias s="du -sh"
+alias sd="du -hd 1"
 
 alias tmux="tmux -2"
 
