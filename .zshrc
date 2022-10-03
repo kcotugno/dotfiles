@@ -81,10 +81,10 @@ mkdir -p "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
 function weather() {
 	local loc=$1
 	if [[ -z "$loc" ]]; then
-		loc="Phoenix, AZ"
+		loc="Phoenix%2C%20AZ"
 	fi
 
-	curl -sSL "wttr.in/$loc?"
+	curl -sSL "https://wttr.in/$loc?"
 }
 
 function proj {
