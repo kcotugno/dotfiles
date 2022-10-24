@@ -96,6 +96,7 @@ augroup indentation
 				\*.html,
 				\*.html.tmpl,
 				\*.json,
+				\*.qtpl,
 				\*.tf,
 				\*.tfvars,
 				\*.vue,
