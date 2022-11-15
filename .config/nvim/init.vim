@@ -28,6 +28,7 @@ Plug 'majutsushi/tagbar'
 Plug 'neovim/nvim-lspconfig'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'posva/vim-vue'
+Plug 'sainnhe/gruvbox-material'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimproc.vim'
@@ -40,20 +41,19 @@ call plug#end()
 
 " vim-plug---END
 
-" Solarized
 syntax enable
 set termguicolors
-colorscheme solarized8
+colorscheme gruvbox-material
 set cursorline
 set colorcolumn=80,100
 
 function ToggleBackground(current)
   if a:current ==# 'dark'
     set background=light
-    hi Whitespace ctermfg=7 guifg=#eee8d5
+    " hi Whitespace ctermfg=7 guifg=#eee8d5
   else
     set background=dark
-    hi Whitespace ctermfg=0 guifg=#073642
+    " hi Whitespace ctermfg=0 guifg=#073642
   end
 endfunction
 
