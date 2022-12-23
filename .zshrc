@@ -96,6 +96,12 @@ function p {
 	cd "$DEVPATH/$project"
 }
 
+function _p {
+	compadd $(ls $DEVPATH)
+}
+
+compdef _p p
+
 alias e='$EDITOR'
 alias s="du -sh"
 alias sd="du -hd 1"
