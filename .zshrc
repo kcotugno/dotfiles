@@ -88,12 +88,12 @@ function weather() {
 	curl -sSL "https://wttr.in/$loc?"
 }
 
-function proj {
-	local proj="$1"
+function p {
+	local project="$1"
 
-	if [[ ! -d "$DEVPATH/$proj" ]]; then echo "Unknown project $proj"; return; fi
+	if [[ ! -d "$DEVPATH/$project" ]]; then echo "Unknown project $project"; return; fi
 
-	cd "$DEVPATH/$proj"
+	cd "$DEVPATH/$project"
 }
 
 alias e='$EDITOR'
