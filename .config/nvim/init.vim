@@ -233,7 +233,7 @@ endfunction
 nnoremap <leader>s :Ags<space>
 
 " FZF
-nnoremap <C-p> :FZF!<CR>
+nnoremap <C-p> :FZF<CR>
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1
