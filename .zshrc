@@ -96,11 +96,13 @@ function p {
 	cd "$DEVPATH/$project"
 }
 
-function _p {
-	compadd $(ls $DEVPATH)
-}
+if [[ $(command -v fd) ]]; then
+	function _p {
+		compadd $(fd --max-depth=1 --type=d . $DEVPATH | xargs basename -a)
+	}
 
-compdef _p p
+	compdef _p p
+fi
 
 alias e='$EDITOR'
 alias s="du -sh"
