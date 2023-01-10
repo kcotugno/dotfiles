@@ -308,6 +308,8 @@ local cmp = require'cmp'
 local sources = {
 	{ name = 'nvim_lsp' },
 	{ name = 'nvim_lua' },
+	{ name = 'vsnip' },
+	{ name = 'path' },
 	{ name = 'buffer' },
 }
 
