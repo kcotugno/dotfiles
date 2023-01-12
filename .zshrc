@@ -98,7 +98,7 @@ function p {
 
 if [[ $(command -v fd) ]]; then
 	function _p {
-		compadd $(fd --max-depth=1 --type=d . $DEVPATH | xargs basename -a)
+		compadd $(fd --no-ignore --max-depth=1 --type=d . $DEVPATH | xargs basename -a)
 	}
 
 	compdef _p p
