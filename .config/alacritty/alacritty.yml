@@ -147,6 +147,7 @@ schemes:
 colors: *gruvbox_material_medium_dark
 
 key_bindings:
+  - { key: F11, action: ToggleFullscreen }
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }
   - { key: C, mods: Alt, chars: "\x1bc" }
