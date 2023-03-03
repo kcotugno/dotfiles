@@ -12,6 +12,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		themes
 		git
 		urltools
+		asdf
 	)
 
 	if [[ $(command -v tmux) ]]; then
@@ -49,18 +50,6 @@ if [[ -d "$HOME/.cargo" ]]; then
 	export PATH=$HOME/.cargo/bin:$PATH
 fi
 
-if [[ -d "$HOME/.rbenv" ]]; then
-	export PATH="$HOME/.rbenv/bin:$PATH"
-	eval "$(rbenv init -)"
-fi
-
-if [[ -d "$HOME/.nvm" ]]; then
-	export NVM_DIR="$HOME/.nvm"
-
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
 if [[ $(command -v nvim) ]]; then
 	export EDITOR="nvim"
 elif [ $(command -v vim) ]; then
@@ -78,6 +67,20 @@ if [[ $(command -v fzf) && $(command -v fd) ]]; then
 fi
 
 mkdir -p "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
+
+function install_asdf_plugins() {
+	if [[ ! $(command -v asdf) ]]; then return; fi
+
+	local asdf_plugins=(ruby nodejs)
+
+	foreach plugin in $asdf_plugins; do
+		if [[ ! -d "$HOME/.asdf/plugins/$plugin" ]]; then
+			echo "Installing asdf $plugin plugin"
+			asdf plugin add $plugin https://github.com/asdf-vm/asdf-$plugin.git
+			asdf install $plugin latest
+		fi
+	done
+}
 
 function weather() {
 	local loc=$1
@@ -114,3 +117,5 @@ alias l="ls -lah"
 alias ll="ls -lh"
 alias la="ls -lah"
 alias hexenc="hexdump -e '1/1 \"%02x\"'"
+
+install_asdf_plugins
