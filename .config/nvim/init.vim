@@ -30,7 +30,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'posva/vim-vue'
 Plug 'sainnhe/gruvbox-material'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimproc.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
