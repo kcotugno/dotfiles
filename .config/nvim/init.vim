@@ -29,7 +29,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'posva/vim-vue'
 Plug 'sainnhe/gruvbox-material'
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimproc.vim'
 Plug 'tpope/vim-dispatch'
