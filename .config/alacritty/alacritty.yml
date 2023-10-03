@@ -1,3 +1,7 @@
+key_bindings:
+  - key: F11
+    action: ToggleFullscreen
+
 window:
   startup_mode: Fullscreen
   option_as_alt: Both
