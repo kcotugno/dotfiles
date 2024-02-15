@@ -68,20 +68,6 @@ fi
 
 mkdir -p "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
 
-function install_asdf_plugins() {
-	if [[ ! $(command -v asdf) ]]; then return; fi
-
-	local asdf_plugins=(ruby nodejs)
-
-	foreach plugin in $asdf_plugins; do
-		if [[ ! -d "$HOME/.asdf/plugins/$plugin" ]]; then
-			echo "Installing asdf $plugin plugin"
-			asdf plugin add $plugin https://github.com/asdf-vm/asdf-$plugin.git
-			asdf install $plugin latest
-		fi
-	done
-}
-
 function weather() {
 	local loc=$1
 	if [[ -z "$loc" ]]; then
@@ -117,5 +103,3 @@ alias l="ls -lah"
 alias ll="ls -lh"
 alias la="ls -lah"
 alias hexenc="hexdump -e '1/1 \"%02x\"'"
-
-install_asdf_plugins
