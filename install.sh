@@ -53,8 +53,8 @@ function detect_package_manager() {
 		check_package_cmd="pacman -Q"
 	elif [ "x$OS" = "xdebian" ]; then
 		install_package_cmd="${sudo}apt-get install -y"
-	elif [ "x$OS" = "darwin" ]; then
-		if [ "x$user" != "xroot" ]; then
+	elif [ "x$OS" = "xdarwin" ]; then
+		if [ "x$user" = "xroot" ]; then
 			echo "Running as root on macOS is unsupported"
 			exit 1
 		fi
