@@ -11,6 +11,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export plugins=(
 		themes
 		git
+		isodate
 		urltools
 		asdf
 	)
