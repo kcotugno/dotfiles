@@ -1,6 +1,5 @@
 .alacritty.toml
 .config/nvim/init.lua
-.config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
 .config/nvim/lua/config/autocmds.lua
 .config/nvim/lua/config/keymaps.lua
