@@ -92,36 +92,9 @@ function install_oh_my_zsh() {
 	git -C "$HOME" clone https://code.cotugno.family/kevin/ohmyzsh.git "$(basename "$oh_my_zsh_dir")"
 }
 
-function install_asdf() {
-	local asdf_dir="$HOME/.asdf"
-	if [ -d "$asdf_dir" ]; then
-		echo "asdf is already installed"
-		return
-	fi
-
-	echo "Installing asdf..."
-	if [ "$OS" = "darwin" ]; then
-		$install_package_cmd asdf
-		. "/usr/local/opt/asdf/libexec/asdf.sh"
-	else
-		git -C "$HOME" clone https://code.cotugno.family/kevin/asdf.git "$(basename "$asdf_dir")"
-		git -C "$asdf_dir" checkout "$(git -C "$asdf_dir" describe --tags --abbrev=0)"
-		. "$asdf_dir/asdf.sh"
-	fi
-}
-
-function setup_asdf() {
-	local asdf_plugins=(ruby nodejs)
-
-	for plugin in ${asdf_plugins[@]}; do
-		if [[ ! -d "$HOME/.asdf/plugins/$plugin" ]]; then
-			echo "Installing asdf $plugin plugin"
-			asdf plugin add "$plugin"
-			asdf install "$plugin" latest
-		else
-			echo "asdf plugin $plugin already installed"
-		fi
-	done
+function install_mise() {
+	curl https://mise.run | sh
+	mise install
 }
 
 function install_files() {
@@ -140,6 +113,5 @@ detect_os
 detect_package_manager
 install_git
 install_oh_my_zsh
-install_asdf
-setup_asdf
+install_mise
 install_files
