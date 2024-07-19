@@ -1,3 +1,5 @@
+mkdir -p "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
+
 oh_my_zsh="$HOME/.oh-my-zsh"
 
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
@@ -13,7 +15,6 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		git
 		isodate
 		urltools
-		asdf
 	)
 
 	if [[ $(command -v tmux) ]]; then
@@ -22,6 +23,11 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		export ZSH_TMUX_AUTOSTART=true
 		fi
 		plugins+=(tmux)
+	fi
+
+	if [[ $(command -v mise) ]]; then
+		plugins+=(mise)
+		eval "$(mise activate zsh)"
 	fi
 
 	if [[ $(command -v fzf) ]]; then plugins+=(fzf); fi
@@ -69,8 +75,6 @@ if [[ -f "$HOME/.work.zsh" ]]; then source "$HOME/.work.zsh"; fi
 if [[ $(command -v fzf) && $(command -v fd) ]]; then
 	export FZF_DEFAULT_COMMAND="fd --type f --hidden --no-ignore --follow --exclude .git"
 fi
-
-mkdir -p "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
 
 function weather() {
 	local loc=$1
