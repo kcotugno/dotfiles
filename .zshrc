@@ -101,6 +101,10 @@ if [[ $(command -v fd) ]]; then
 	compdef _p p
 fi
 
+function clean_file_backslash {
+  for i in *; do new=${i//\\/\/}; newd=$(dirname "$new"); mkdir -p "$newd"; mv "$i" "$new"; done
+}
+
 alias e='$EDITOR'
 alias s="du -sh"
 alias sd="du -hd 1"
