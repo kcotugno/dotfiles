@@ -6,7 +6,7 @@ local max_height = vim.o.lines
 local max_width = vim.o.columns
 local fullscreen_inset = 2
 
-function toggle_background()
+function ToggleBackground()
   if vim.opt.background:get() == "dark" then
     vim.opt.background = "light"
   else
@@ -52,7 +52,7 @@ end
 vim.keymap.set(
   "n",
   "<F5>",
-  "<cmd>lua toggle_background()<cr>",
+  "<cmd>lua ToggleBackground()<cr>",
   { desc = "Switch between dark and light themes", noremap = true }
 )
 
