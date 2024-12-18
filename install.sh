@@ -108,6 +108,14 @@ function install_files() {
 	done
 }
 
+function remove_files() {
+	for file in $(cat remove.txt); do
+		echo "Removing $file"
+
+		rm -f "$HOME/$file"
+	done
+}
+
 is_sudo
 detect_os
 detect_package_manager
@@ -115,3 +123,4 @@ install_git
 install_oh_my_zsh
 install_mise
 install_files
+remove_files

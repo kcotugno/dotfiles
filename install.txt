@@ -6,9 +6,9 @@
 .config/nvim/lua/config/lazy.lua
 .config/nvim/lua/config/options.lua
 .config/nvim/lua/plugins/apex.lua
+.config/nvim/lua/plugins/fzf-lua.lua
 .config/nvim/lua/plugins/gruvbox.lua
 .config/nvim/lua/plugins/neo-tree.lua
-.config/nvim/lua/plugins/telescope.lua
 .config/nvim/stylua.toml
 .emacs.d/init.el
 .emacs.d/themes/solarized/LICENSE
