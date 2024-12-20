@@ -5,7 +5,6 @@ oh_my_zsh="$HOME/.oh-my-zsh"
 
 if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	export ZSH="$oh_my_zsh"
-	export DISABLE_AUTO_UPDATE=true
 
 	if (( !${+ZSH_THEME} )); then
 		export ZSH_THEME="simple"
