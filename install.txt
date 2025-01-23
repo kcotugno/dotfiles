@@ -19,5 +19,4 @@
 .local/bin/ansible-vault-password
 .local/lib/get-env-var.rb
 .tmux.conf
-.tool-versions
 .zshrc
