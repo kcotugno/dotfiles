@@ -93,6 +93,12 @@ function install_oh_my_zsh() {
 }
 
 function install_mise() {
+	if [[ $(command -v mise) ]]; then
+		echo "Mise is already installed...updating"
+		mise self-update
+		return
+	fi
+
 	curl https://mise.run | sh
 	mise install
 }
