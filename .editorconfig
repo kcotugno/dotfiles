@@ -1,4 +1,4 @@
-[.zshrc,*.zsh]
+[*.{zshrc,zsh,sh}]
 indent_style = tab
 indent_size = 8
 trim_trailing_whitespace = true
