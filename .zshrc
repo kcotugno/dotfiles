@@ -103,6 +103,25 @@ function clean_file_backslash {
   for i in *; do new=${i//\\/\/}; newd=$(dirname "$new"); mkdir -p "$newd"; mv "$i" "$new"; done
 }
 
+# TODO: Add support for macOS
+function sync_alacritty_theme() {
+	local theme=$(qdbus org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.portal.Settings.Read "org.freedesktop.appearance" "color-scheme")
+	local dark_theme="$HOME/.alacritty.dark.toml"
+	local light_theme="$HOME/.alacritty.light.toml"
+	local alacritty_conf="$HOME/.alacritty.toml"
+
+	if [[ ! -e "$dark_theme" || ! -e "$light_theme" ]]; then
+		echo "Dark and/or light theme files do not exist"
+		return
+	fi
+
+	if (( theme == 1 )); then
+		ln -sfr "$dark_theme" "$alacritty_conf"
+	elif (( theme == 2)); then
+		ln -sfr "$light_theme" "$alacritty_conf"
+	fi
+}
+
 alias e='$EDITOR'
 alias s="du -sh"
 alias sd="du -hd 1"
@@ -113,3 +132,5 @@ alias l="ls -lah"
 alias ll="ls -lh"
 alias la="ls -lah"
 alias hexenc="hexdump -e '1/1 \"%02x\"'"
+
+sync_alacritty_theme
