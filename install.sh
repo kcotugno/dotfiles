@@ -2,6 +2,7 @@
 set -eo pipefail
 
 user=$(whoami)
+alacritty_conf="$HOME/.alacritty.toml"
 
 if [ "x$HOME" = "x" ]; then
 	echo "HOME must be set"
@@ -111,6 +112,19 @@ function install_files() {
 			mkdir -p "$HOME/$(dirname "$file")"
 		fi
 		cp "$file" "$HOME/$file"
+	done
+
+	local alacritty_themes=(".alacritty.dark.toml" ".alacritty.light.toml")
+	for theme in ${alacritty_themes[@]}; do
+		echo "Installing $theme"
+		local destination="$HOME/$theme"
+		cp ".alacritty.toml" "$destination"
+		cat "$theme" >>"$destination"
+
+		if [[ "$theme" == ".alacritty.dark.toml" ]]; then
+			rm "$alacritty_conf"
+			ln -sr "$destination" "$alacritty_conf"
+		fi
 	done
 }
 
