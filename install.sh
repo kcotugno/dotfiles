@@ -2,7 +2,7 @@
 set -eo pipefail
 
 user=$(whoami)
-alacritty_conf="$HOME/.alacritty.toml"
+alacritty_conf=".alacritty.toml"
 
 if [ "x$HOME" = "x" ]; then
 	echo "HOME must be set"
@@ -122,8 +122,7 @@ function install_files() {
 		cat "$theme" >>"$destination"
 
 		if [[ "$theme" == ".alacritty.dark.toml" ]]; then
-			rm "$alacritty_conf"
-			ln -sr "$destination" "$alacritty_conf"
+			(cd $HOME && ln -sf "$(basename $destination)" "./$alacritty_conf")
 		fi
 	done
 }
