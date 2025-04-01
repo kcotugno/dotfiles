@@ -99,6 +99,10 @@ if [[ $(command -v fd) ]]; then
 	compdef _p p
 fi
 
+if [[ $(command -v com.brave.Browser) ]]; then
+	export CHROME_PATH=$(which com.brave.Browser)
+fi
+
 function clean_file_backslash {
   for i in *; do new=${i//\\/\/}; newd=$(dirname "$new"); mkdir -p "$newd"; mv "$i" "$new"; done
 }
