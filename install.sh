@@ -36,6 +36,9 @@ function detect_os() {
 		# Older Debian/Ubuntu/etc.
 		OS=Debian
 		VER=$(cat /etc/debian_version)
+	elif [ -n "${TERMUX_VERSION+x}" ]; then
+		OS=termux
+		VER=$TERMUX_VERSION
 	else
 		# Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
 		OS=$(uname -s)
@@ -63,6 +66,9 @@ function detect_package_manager() {
 
 		install_package_cmd="brew install"
 		check_package_cmd="brew list --formula"
+	elif [ "x$OS" = "xtermux" ]; then
+		install_package_cmd="pkg install"
+		check_package_cmd="dpkg -l"
 	else
 		echo "Unknown and unsupported package manager"
 		exit 1
