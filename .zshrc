@@ -60,6 +60,13 @@ if [[ -d "$HOME/.cargo" ]]; then
 	export PATH=$HOME/.cargo/bin:$PATH
 fi
 
+ANDROID_HOME="$DEVPATH/Android/Sdk"
+if [[ -d "$ANDROID_HOME" ]]; then
+	export ANDROID_HOME
+	export PATH="$ANDROID_HOME/emulator:$PATH"
+	export PATH="$ANDROID_HOME/platform-tools:$PATH"
+fi
+
 if [[ $(command -v nvim) ]]; then
 	export EDITOR="nvim"
 elif [ $(command -v vim) ]; then
