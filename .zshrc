@@ -110,6 +110,10 @@ if [[ $(command -v com.brave.Browser) ]]; then
 	export CHROME_PATH=$(which com.brave.Browser)
 fi
 
+if [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
+
 function clean_file_backslash {
   for i in *; do new=${i//\\/\/}; newd=$(dirname "$new"); mkdir -p "$newd"; mv "$i" "$new"; done
 }
