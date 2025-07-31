@@ -25,10 +25,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		plugins+=(tmux)
 	fi
 
-	if [[ $(command -v mise) ]]; then
-		plugins+=(mise)
-		eval "$(mise activate zsh)"
-	fi
+	command -v mise &>/dev/null && plugins+=(mise)
 
 	if [[ $(command -v fzf) ]]; then plugins+=(fzf); fi
 
