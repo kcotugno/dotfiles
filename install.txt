@@ -10,10 +10,6 @@
 .config/nvim/lua/plugins/gruvbox.lua
 .config/nvim/lua/plugins/neo-tree.lua
 .config/nvim/stylua.toml
-.emacs.d/init.el
-.emacs.d/themes/solarized/LICENSE
-.emacs.d/themes/solarized/solarized-definitions.el
-.emacs.d/themes/solarized/solarized-theme.el
 .local/bin/ansible-become-password
 .local/bin/ansible-vault-password
 .local/lib/get-env-var.rb
