@@ -17,7 +17,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 		urltools
 	)
 
-	if [[ $(command -v tmux) ]]; then
+	if command -v tmux &>/dev/null; then
 		# Only start/attach if no existing session with client.
 		if [[ (( $(tmux list-sessions -F "#{session_attached}" 2>/dev/null || echo 0) = 0 )) && ! -v "ZSH_TMUX_AUTOSTART" ]]; then
 		export ZSH_TMUX_AUTOSTART=true
@@ -27,11 +27,9 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 
 	command -v mise &>/dev/null && plugins+=(mise)
 
-	if [[ $(command -v fzf) ]]; then plugins+=(fzf); fi
+	command -v fzf &>/dev/null && plugins+=(fzf)
 
-	if [[ $(command -v systemctl) ]]; then
-		plugins+=(systemd)
-	fi
+	command -v systemctl &>/dev/null && plugins+=(systemd)
 
 	source "$oh_my_zsh/oh-my-zsh.sh"
 fi
@@ -48,7 +46,7 @@ if [[ -z "$USER" ]]; then
 	export USER
 fi
 
-if [[ $(command -v go) ]]; then
+if command -v go &>/dev/null; then
 	export GOPATH="$DEVPATH/go"
 	export PATH="$GOPATH/bin:$PATH"
 fi
@@ -64,17 +62,17 @@ if [[ -d "$ANDROID_HOME" ]]; then
 	export PATH="$ANDROID_HOME/platform-tools:$PATH"
 fi
 
-if [[ $(command -v nvim) ]]; then
+if command -v nvim &>/dev/null; then
 	export EDITOR="nvim"
-elif [ $(command -v vim) ]; then
+elif command -v vim &>/dev/null; then
 	export EDITOR="vim"
 else
 	export EDITOR="vi"
 fi
 
-if [[ $(command -v uname) ]] && uname -r | grep -iq microsoft-standard; then source "$HOME/.wsl.zsh"; fi
+if command -v uname &>/dev/null && uname -r | grep -iq microsoft-standard; then source "$HOME/.wsl.zsh"; fi
 
-if [[ $(command -v fzf) && $(command -v fd) ]]; then
+if command -v fzf &>/dev/null && command -v fd &>/dev/null; then
 	export FZF_DEFAULT_COMMAND="fd --type f --hidden --no-ignore --follow --exclude .git"
 fi
 
@@ -95,7 +93,7 @@ function p {
 	cd "$DEVPATH/$project"
 }
 
-if [[ $(command -v fd) ]]; then
+if command -v fd &>/dev/null; then
 	function _p {
 		compadd $(fd --no-ignore --max-depth=1 --type=d . $DEVPATH | xargs basename -a)
 	}
@@ -103,7 +101,7 @@ if [[ $(command -v fd) ]]; then
 	compdef _p p
 fi
 
-if [[ $(command -v com.brave.Browser) ]]; then
+if command -v com.brave.Browser &>/dev/null; then
 	export CHROME_PATH=$(which com.brave.Browser)
 fi
 
