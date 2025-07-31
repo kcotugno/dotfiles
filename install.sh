@@ -101,6 +101,11 @@ function install_oh_my_zsh() {
 }
 
 function install_mise() {
+	if check_package_installed mise; then
+		echo "mise managed through the package manager. Skipping..."
+		return
+	fi
+
 	if [[ $(command -v mise) ]]; then
 		echo "Mise is already installed...updating"
 		mise self-update
