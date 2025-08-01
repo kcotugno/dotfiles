@@ -101,8 +101,8 @@ if command -v fd &>/dev/null; then
 	compdef _p p
 fi
 
-if command -v com.brave.Browser &>/dev/null; then
-	export CHROME_PATH=$(which com.brave.Browser)
+if command -v brave &>/dev/null; then
+	export CHROME_PATH=$(which brave)
 fi
 
 if [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
