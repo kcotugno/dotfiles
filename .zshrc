@@ -69,6 +69,7 @@ elif command -v vim &>/dev/null; then
 else
 	export EDITOR="vi"
 fi
+export SUDO_EDITOR="$EDITOR"
 
 if command -v uname &>/dev/null && uname -r | grep -iq microsoft-standard; then source "$HOME/.wsl.zsh"; fi
 
@@ -113,13 +114,28 @@ function clean_file_backslash {
 	for i in *; do new=${i//\\/\/}; newd=$(dirname "$new"); mkdir -p "$newd"; mv "$i" "$new"; done
 }
 
+OMARCHY_PATH="$HOME/.local/share/omarchy"
+if [[ -d "$OMARCHY_PATH" ]]; then
+	export PATH="$OMARCHY_PATH/bin:$PATH"
+	source ".omarchy.functions.zsh"
+	source ".omarchy.aliases.zsh"
+fi
+
 alias e='$EDITOR'
+
 alias s="du -sh"
 alias sd="du -hd 1"
 
 alias tmux="tmux -2"
 
-alias l="ls -lah"
-alias ll="ls -lh"
-alias la="ls -lah"
 alias hexenc="hexdump -e '1/1 \"%02x\"'"
+
+if command -v eza &>/dev/null; then
+	alias l="ls"
+	alias ll="ls"
+else
+	alias l="ls -lh"
+	alias ll="ls"
+	alias la="ls -lah"
+fi
+

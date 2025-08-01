@@ -16,3 +16,5 @@
 .local/lib/get-env-var.rb
 .tmux.conf
 .zshrc
+.omarchy.aliases.zsh
+.omarchy.functions.zsh
