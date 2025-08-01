@@ -59,7 +59,7 @@ ANDROID_HOME="$DEVPATH/Android/Sdk"
 if [[ -d "$ANDROID_HOME" ]]; then
 	export ANDROID_HOME
 	export PATH="$ANDROID_HOME/emulator:$PATH"
-	export PATH="$ANDROID_HOME/platform-tools:$PATH"
+	export PATH="$PATH:$ANDROID_HOME/platform-tools"
 fi
 
 if command -v nvim &>/dev/null; then
