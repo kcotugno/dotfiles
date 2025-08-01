@@ -113,45 +113,6 @@ function clean_file_backslash {
   for i in *; do new=${i//\\/\/}; newd=$(dirname "$new"); mkdir -p "$newd"; mv "$i" "$new"; done
 }
 
-function system_color_theme () {
-	case "$(uname -s)" in
-		Darwin)
-			if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" != "Dark" ]]; then
-				echo "light"
-				return
-			fi
-			;;
-		Linux)
-			if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
-				if (( $(qdbus org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.portal.Settings.Read "org.freedesktop.appearance" "color-scheme") == 2 )); then
-					echo "light"
-					return
-				fi
-			fi
-			;;
-	esac
-
-	echo "dark"
-}
-
-function sync_alacritty_theme() {
-	local theme=$(system_color_theme)
-	local dark_theme=".alacritty.dark.toml"
-	local light_theme=".alacritty.light.toml"
-	local alacritty_conf=".alacritty.toml"
-
-	if [[ ! -e "$HOME/$dark_theme" || ! -e "$HOME/$light_theme" ]]; then
-		echo "Dark and/or light theme files do not exist"
-		return
-	fi
-
-	if [[ "$theme" == "light" ]]; then
-		(cd $HOME && ln -sf "$light_theme" "$alacritty_conf")
-	else
-		(cd $HOME && ln -sf "$dark_theme" "$alacritty_conf")
-	fi
-}
-
 alias e='$EDITOR'
 alias s="du -sh"
 alias sd="du -hd 1"
@@ -162,5 +123,3 @@ alias l="ls -lah"
 alias ll="ls -lh"
 alias la="ls -lah"
 alias hexenc="hexdump -e '1/1 \"%02x\"'"
-
-sync_alacritty_theme
