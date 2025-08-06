@@ -1,7 +1,9 @@
 .config/alacritty/alacritty.toml
+.config/hypr/bindings.conf
 .config/hypr/hyprland.conf
 .config/hypr/hyprlock.conf
 .config/hypr/hyprsunset.conf
+.config/hypr/input.conf
 .config/mise/config.toml
 .config/nvim/init.lua
 .config/nvim/lazyvim.json
