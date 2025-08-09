@@ -117,8 +117,8 @@ function clean_file_backslash {
 OMARCHY_PATH="$HOME/.local/share/omarchy"
 if [[ -d "$OMARCHY_PATH" ]]; then
 	export PATH="$OMARCHY_PATH/bin:$PATH"
-	source ".omarchy.functions.zsh"
-	source ".omarchy.aliases.zsh"
+	source "$HOME/.omarchy.functions.zsh"
+	source "$HOME/.omarchy.aliases.zsh"
 fi
 
 alias e='$EDITOR'
