@@ -1,4 +1,5 @@
 .config/alacritty/alacritty.toml
+.config/hypr/autostart.conf
 .config/hypr/bindings.conf
 .config/hypr/hypridle.conf
 .config/hypr/hyprland.conf
