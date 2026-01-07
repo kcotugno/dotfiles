@@ -20,7 +20,7 @@ if [[ -f "$oh_my_zsh/oh-my-zsh.sh" ]]; then
 	if command -v tmux &>/dev/null; then
 		# Only start/attach if no existing session with client.
 		if [[ (( $(tmux list-sessions -F "#{session_attached}" 2>/dev/null || echo 0) = 0 )) && ! -v "ZSH_TMUX_AUTOSTART" ]]; then
-		export ZSH_TMUX_AUTOSTART=true
+			export ZSH_TMUX_AUTOSTART=true
 		fi
 		plugins+=(tmux)
 	fi
