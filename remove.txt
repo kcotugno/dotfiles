@@ -1,6 +1,7 @@
 .alacritty.toml
 .alacritty.light.toml
 .alacritty.dark.toml
+.config/alacritty/alacritty.toml
 .config/nvim/lua/plugins/apex.lua
 .config/nvim/lua/plugins/telescope.lua
 .tool-versions
