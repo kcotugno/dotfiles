@@ -17,7 +17,6 @@
 .config/nvim/lua/plugins/gruvbox.lua
 .config/nvim/lua/plugins/neo-tree.lua
 .config/nvim/stylua.toml
-.config/waybar/config.jsonc
 .local/bin/ansible-become-password
 .local/bin/ansible-vault-password
 .local/lib/get-env-var.rb
