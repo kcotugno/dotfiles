@@ -1,3 +1,4 @@
+.config/git/ignore
 .config/hypr/autostart.conf
 .config/hypr/bindings.conf
 .config/hypr/hypridle.conf
