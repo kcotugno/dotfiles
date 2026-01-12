@@ -1,5 +1,6 @@
 .config/git/ignore
 .config/fish
+.config/ghostty
 .config/hypr/autostart.conf
 .config/hypr/bindings.conf
 .config/hypr/hypridle.conf
