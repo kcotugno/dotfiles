@@ -1,4 +1,5 @@
 .config/git/ignore
+.config/fish
 .config/hypr/autostart.conf
 .config/hypr/bindings.conf
 .config/hypr/hypridle.conf
@@ -21,6 +22,3 @@
 .local/bin/ansible-vault-password
 .local/lib/get-env-var.rb
 .tmux.conf
-.zshrc
-.omarchy.aliases.zsh
-.omarchy.functions.zsh
