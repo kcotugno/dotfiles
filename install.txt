@@ -1,13 +1,7 @@
 .config/git/ignore
 .config/fish
 .config/ghostty
-.config/hypr/autostart.conf
-.config/hypr/bindings.conf
-.config/hypr/hypridle.conf
-.config/hypr/hyprland.conf
-.config/hypr/hyprlock.conf
-.config/hypr/hyprsunset.conf
-.config/hypr/input.conf
+.config/hypr
 .config/mise/config.toml
 .config/nvim/init.lua
 .config/nvim/lazyvim.json

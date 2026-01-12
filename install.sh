@@ -115,20 +115,44 @@ function install_mise() {
 	mise install
 }
 
-function install_files() {
-	for file in $(cat install.txt); do
-		echo "Installing $file"
+function install_dir() {
+	local dir=$1
+	echo "Installing directory: $dir"
 
-		if [ "$(dirname "$file")" != "." ]; then
-			mkdir -p "$HOME/$(dirname "$file")"
+	for path in $(find "$dir" -type f); do
+		install_file "$path"
+	done
+
+	echo "Done installing directory: $dir"
+}
+
+function install_file() {
+	local file=$1
+	local new_dir="$HOME/$(dirname "$file")"
+
+	if [ "$new_dir" != "." ] && [ ! -d "$new_dir" ]; then
+		echo "Creating directory: $new_dir"
+		mkdir -p "$new_dir"
+	fi
+
+	echo "Installing: $file"
+	cp "$file" "$HOME/$file"
+
+}
+
+function install_files() {
+	for path in $(cat install.txt); do
+		if [ -d "$path" ]; then
+			install_dir "$path"
+		else
+			install_file "$path"
 		fi
-		cp -r "$file" "$HOME/$file"
 	done
 }
 
 function remove_files() {
 	for file in $(cat remove.txt); do
-		echo "Removing $file"
+		echo "Removing: $file"
 
 		rm -f "$HOME/$file"
 	done
