@@ -122,7 +122,7 @@ function install_files() {
 		if [ "$(dirname "$file")" != "." ]; then
 			mkdir -p "$HOME/$(dirname "$file")"
 		fi
-		cp "$file" "$HOME/$file"
+		cp -r "$file" "$HOME/$file"
 	done
 }
 
