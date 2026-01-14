@@ -20,6 +20,10 @@ if status is-interactive
         zoxide init fish | source
     end
 
+    if command -sq fzf
+        fzf --fish | source
+    end
+
     if ! test -d "$HOME/devel"
         mkdir -p "$HOME/devel"
     end
