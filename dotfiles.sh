@@ -75,7 +75,7 @@ function detect_package_manager() {
 }
 
 function is_hyprland_active() {
-	if pgrep -x hyprland >/dev/null 2>&1; then
+	if pgrep -x Hyprland >/dev/null 2>&1; then
 		return 0
 	else
 		return 1
