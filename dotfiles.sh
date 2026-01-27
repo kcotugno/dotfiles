@@ -191,6 +191,7 @@ fi
 if [ "$command" = "uninstall" ]; then
 	remove_stow_packages "${packages_to_remove[@]}"
 elif [ "$command" = "install" ]; then
+	nvim_plugin_theme=no
 	packages=(git stow lazygit fzf ripgrep fd nvim zoxide)
 	if $ui; then
 		packages+=(ghostty)
@@ -203,8 +204,14 @@ elif [ "$command" = "install" ]; then
 		stow_packages+=("${gui_stow_packages[@]}")
 		if is_hyprland_active; then
 			stow_packages+=("hyprland")
+			nvim_plugin_theme=yes
 		fi
 	fi
 
 	install_stow_packages
+
+	if [ "$nvim_plugin_theme" = "yes" ]; then
+		echo "Install omarchy neovim theme syslink..."
+		ln -snf "${HOME}/.config/omarchy/current/theme/neovim.lua" "${HOME}/.config/nvim/lua/plugins/theme.lua"
+	fi
 fi
