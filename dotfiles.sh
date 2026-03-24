@@ -125,7 +125,7 @@ function install_mise() {
 
 function install_stow_packages() {
 	echo "Installing stow packages" "${stow_packages[@]}"
-	stow "${stow_packages[@]}"
+	stow --no-folding "${stow_packages[@]}"
 }
 
 function remove_stow_packages() {
