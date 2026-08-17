@@ -1,27 +1,40 @@
 if status is-interactive
-    starship init fish | source
+    if not functions -q zd
+        fish_vi_key_bindings
 
-    if command -sq brave
-        set -x CHROME_PATH (command -s brave)
+        if command -sq starship
+            starship init fish | source
+        end
+
+        if command -sq mise
+            mise activate fish | source
+        end
+
+        if command -sq zoxide
+            zoxide init fish | source
+            alias cd z
+        end
+
+        if command -sq fzf
+            fzf --fish | source
+        end
+
+        if command -sq eza
+            alias ls "eza -lh --group-directories-first --icons=auto"
+        end
+
+        alias g git
     end
 
-    if command -sq eza
-        alias ls eza
+    if functions -q zd; or command -sq eza
         alias l ls
     else
         alias l "ls -lh"
     end
 
-    if command -sq mise
-        mise activate fish | source
-    end
-
-    if command -sq zoxide
-        zoxide init fish | source
-    end
-
-    if command -sq fzf
-        fzf --fish | source
+    set -l chrome (command -s brave-origin brave)
+    if set -q chrome[1]
+        set -x CHROME_PATH $chrome[1]
     end
 
     if ! test -d "$HOME/devel"
@@ -32,18 +45,7 @@ if status is-interactive
     set -x GOPATH "$DEVPATH/go"
 
     set -x RIPGREP_CONFIG_PATH "$HOME/.config/ripgreprc"
-
-    bind ctrl-s 'sesh connect "$( sesh list --icons | fzf \
-    --no-sort --ansi --border-label \' sesh \' --prompt \'⚡ \' \
-    --header \' ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find\' \
-    --bind \'tab:down,btab:up\' \
-    --bind \'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)\' \
-    --bind \'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)\' \
-    --bind \'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)\' \
-    --bind \'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)\' \
-    --bind \'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)\' \
-    --bind \'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)\' \
-    --preview-window \'right:55%\' \
-    --preview \'sesh preview {}\'
-  )"'
 end
+
+# fabro
+fish_add_path $HOME/.fabro/bin

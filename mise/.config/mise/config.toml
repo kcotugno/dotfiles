@@ -1,9 +1,13 @@
 [tools]
+claude = "latest"
+codex = "latest"
 node = "latest"
 ruby = "latest"
+go = "latest"
+gh = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
 
-[settings.ruby]
-compile = false
+[tool_alias]
+tailwindcss = "github:tailwindlabs/tailwindcss"
