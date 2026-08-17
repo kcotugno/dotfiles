@@ -2,9 +2,10 @@
 set -eo pipefail
 
 base_stow_packages=(ansible fish git mise nvim tmux)
-gui_stow_packages=(ghostty)
+gui_stow_packages=()
 
 user=$(whoami)
+hostname=$(hostname)
 
 if [ "$HOME" = "" ]; then
 	echo "HOME must be set"
@@ -123,6 +124,26 @@ function install_mise() {
 	mise install
 }
 
+function bootstrap_nvim() {
+	local nvim_config="${HOME}/.config/nvim"
+
+	if [ ! -f "${nvim_config}/init.lua" ]; then
+		echo "Bootstrapping LazyVim starter into ${nvim_config}..."
+		local tmp
+		tmp=$(mktemp -d)
+		git clone --depth 1 https://github.com/LazyVim/starter "${tmp}/starter"
+		rm -rf "${tmp}/starter/.git"
+		mkdir -p "$nvim_config"
+		cp -rn "${tmp}/starter/." "${nvim_config}/"
+		rm -rf "$tmp"
+	fi
+
+	local target
+	while IFS= read -r target; do
+		rm -f "${HOME}/${target#nvim/}"
+	done < <(find nvim -mindepth 1 -type f)
+}
+
 function install_stow_packages() {
 	echo "Installing stow packages" "${stow_packages[@]}"
 	stow --no-folding "${stow_packages[@]}"
@@ -191,11 +212,8 @@ fi
 if [ "$command" = "uninstall" ]; then
 	remove_stow_packages "${packages_to_remove[@]}"
 elif [ "$command" = "install" ]; then
-	nvim_plugin_theme=no
 	packages=(git stow lazygit fzf ripgrep fd nvim zoxide)
-	if $ui; then
-		packages+=(ghostty)
-	fi
+
 	install_packages
 	install_mise
 
@@ -204,14 +222,16 @@ elif [ "$command" = "install" ]; then
 		stow_packages+=("${gui_stow_packages[@]}")
 		if is_hyprland_active; then
 			stow_packages+=("hyprland")
-			nvim_plugin_theme=yes
 		fi
 	fi
 
-	install_stow_packages
-
-	if [ "$nvim_plugin_theme" = "yes" ]; then
-		echo "Install omarchy neovim theme syslink..."
-		ln -snf "${HOME}/.config/omarchy/current/theme/neovim.lua" "${HOME}/.config/nvim/lua/plugins/theme.lua"
+	if ls "./${hostname}" &>/dev/null ; then
+		stow_packages+=("${hostname}")
 	fi
+
+	if [[ " ${stow_packages[*]} " == *" nvim "* ]]; then
+		bootstrap_nvim
+	fi
+
+	install_stow_packages
 fi
