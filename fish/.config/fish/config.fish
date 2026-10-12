@@ -47,5 +47,3 @@ if status is-interactive
     set -x RIPGREP_CONFIG_PATH "$HOME/.config/ripgreprc"
 end
 
-# fabro
-fish_add_path $HOME/.fabro/bin
