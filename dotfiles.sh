@@ -25,7 +25,11 @@ function detect_os() {
 		# freedesktop.org and systemd
 		# shellcheck disable=SC1091
 		. /etc/os-release
-		OS=Arch
+		case " $ID $ID_LIKE " in
+		*" arch "*) OS=Arch ;;
+		*" debian "* | *" ubuntu "*) OS=Debian ;;
+		*) OS=$ID ;;
+		esac
 
 	elif type lsb_release >/dev/null 2>&1; then
 		# linuxbase.org
@@ -56,8 +60,9 @@ function detect_package_manager() {
 		install_package_cmd="${sudo}pacman -S --noconfirm"
 		check_package_cmd="pacman -Q"
 	elif [ "$OS" = "debian" ]; then
-		install_package_cmd="${sudo}apt-get install -y"
-		check_package_cmd="dpkg -l"
+		update_package_index_cmd="${sudo}apt-get update"
+		install_package_cmd="${sudo}env DEBIAN_FRONTEND=noninteractive apt-get install -y"
+		check_package_cmd="dpkg_installed"
 	elif [ "$OS" = "darwin" ]; then
 		if [ "$user" = "root" ]; then
 			echo "Running as root on macOS is unsupported"
@@ -91,21 +96,64 @@ function is_display_active() {
 	fi
 }
 
+# `dpkg -l` succeeds for removed-but-not-purged packages, so check the status.
+function dpkg_installed() {
+	dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -q "install ok installed"
+}
+
 function check_package_installed() {
 	$check_package_cmd "$1" &>/dev/null || return 1
 }
 
+# Translate a package name to the one used by the current OS's package manager.
+function package_name() {
+	if [ "$OS" = "debian" ]; then
+		case $1 in
+		# Debian's neovim is too old for LazyVim; install_mise_tools installs it.
+		nvim) ;;
+		fd) echo fd-find ;;
+		*) echo "$1" ;;
+		esac
+	else
+		echo "$1"
+	fi
+}
+
 function install_packages() {
+	local failed=()
+
+	if [ -n "$update_package_index_cmd" ]; then
+		echo -n "Updating package index..."
+		$update_package_index_cmd >/dev/null 2>&1
+		echo "done"
+	fi
+
 	for package in "${packages[@]}"; do
+		package=$(package_name "$package")
+		if [ -z "$package" ]; then continue; fi
 		echo -n "Installing $package..."
 		if check_package_installed "$package"; then
 			echo "already installed, skipping"
 			continue
 		fi
 
-		$install_package_cmd "$package" >/dev/null 2>&1
-		echo "done"
+		if $install_package_cmd "$package" >/dev/null 2>&1; then
+			echo "done"
+		else
+			echo "failed"
+			failed+=("$package")
+		fi
 	done
+
+	# Debian ships fd as `fdfind` to avoid a name clash.
+	if [ "$OS" = "debian" ] && command -v fdfind >/dev/null && ! command -v fd >/dev/null; then
+		mkdir -p "${HOME}/.local/bin"
+		ln -sf "$(command -v fdfind)" "${HOME}/.local/bin/fd"
+	fi
+
+	if [ "${#failed[@]}" -gt 0 ]; then
+		echo "Failed to install:" "${failed[@]}"
+	fi
 }
 
 function install_mise() {
@@ -121,7 +169,19 @@ function install_mise() {
 	fi
 
 	curl https://mise.run | sh
-	mise install
+	# mise.run installs to ~/.local/bin, which may not be on PATH yet.
+	export PATH="${HOME}/.local/bin:${PATH}"
+}
+
+# Runs after stow so the global mise config is in place.
+function install_mise_tools() {
+	if [ "$OS" = "debian" ]; then
+		mkdir -p "${HOME}/.config/mise/conf.d"
+		printf '[tools]\nneovim = "latest"\n' >"${HOME}/.config/mise/conf.d/debian.toml"
+	fi
+
+	echo "Installing mise tools"
+	(cd "$HOME" && mise install)
 }
 
 function bootstrap_nvim() {
@@ -234,4 +294,5 @@ elif [ "$command" = "install" ]; then
 	fi
 
 	install_stow_packages
+	install_mise_tools
 fi
