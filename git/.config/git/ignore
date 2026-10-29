@@ -3,3 +3,4 @@ avante.md
 tmp*
 
 **/.claude/settings.local.json
+**/.claude/plans/*
