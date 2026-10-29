@@ -42,8 +42,17 @@ if status is-interactive
     end
 
     set -x DEVPATH "$HOME/devel"
-    set -x GOPATH "$DEVPATH/go"
 
     set -x RIPGREP_CONFIG_PATH "$HOME/.config/ripgreprc"
 end
 
+set -l xdg_data "$HOME/.local/share"
+set -q XDG_DATA_HOME; and set xdg_data $XDG_DATA_HOME
+set -l xdg_cache "$HOME/.cache"
+set -q XDG_CACHE_HOME; and set xdg_cache $XDG_CACHE_HOME
+set -l xdg_bin "$HOME/.local/bin"
+set -q XDG_BIN_HOME; and set xdg_bin $XDG_BIN_HOME
+
+set -x GOPATH "$xdg_data/go"
+set -x GOMODCACHE "$xdg_cache/go/mod"
+set -x GOBIN "$xdg_bin"
