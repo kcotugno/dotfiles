@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-base_stow_packages=(ansible fish git mise nvim tmux)
+base_stow_packages=(ansible fish git mise nvim ripgrep tmux)
 gui_stow_packages=()
 
 user=$(whoami)
