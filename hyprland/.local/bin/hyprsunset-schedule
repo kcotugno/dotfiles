@@ -1,0 +1,83 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Drive hyprsunset from the sun's position.
+#
+# Evening: ramps from neutral to NIGHT_TEMP over the hour before sunset.
+# Morning: ramps from NIGHT_TEMP back to neutral over the hour after sunrise.
+#
+# Meant to run once a minute (see hyprsunset-schedule.timer). It only touches
+# hyprsunset when the target changes, so a manual night-light toggle sticks
+# until the next ramp.
+
+require "fileutils"
+require "open3"
+
+LAT = Float(ENV.fetch("HYPRSUNSET_LAT", "33.4484")) # Phoenix
+LON = Float(ENV.fetch("HYPRSUNSET_LON", "-112.0740"))
+NIGHT_TEMP = Integer(ENV.fetch("HYPRSUNSET_NIGHT_TEMP", "1500"))
+DAY_TEMP = 6500 # Neutral; at full day we use identity instead.
+RAMP = 3600.0 # seconds
+
+STATE = File.join(ENV.fetch("XDG_STATE_HOME", File.join(Dir.home, ".local/state")), "hyprsunset-schedule")
+
+# Sunrise and sunset (UTC Times) for the local date of `now` (NOAA approximation).
+def sun_times(now, lat, lon)
+  local = now.localtime
+  gamma = 2 * Math::PI / 365 * (local.yday - 1)
+  eqtime = 229.18 * (0.000075 +
+                     0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma) -
+                     0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma))
+  decl = 0.006918 -
+         0.399912 * Math.cos(gamma) + 0.070257 * Math.sin(gamma) -
+         0.006758 * Math.cos(2 * gamma) + 0.000907 * Math.sin(2 * gamma) -
+         0.002697 * Math.cos(3 * gamma) + 0.00148 * Math.sin(3 * gamma)
+  lat_r = lat * Math::PI / 180
+  cos_ha = Math.cos(90.833 * Math::PI / 180) / (Math.cos(lat_r) * Math.cos(decl)) -
+           Math.tan(lat_r) * Math.tan(decl)
+  ha = Math.acos(cos_ha.clamp(-1.0, 1.0)) * 180 / Math::PI # Clamp for polar day/night.
+  midnight = Time.utc(local.year, local.month, local.day)
+  [midnight + (720 - 4 * (lon + ha) - eqtime) * 60,
+   midnight + (720 - 4 * (lon - ha) - eqtime) * 60]
+end
+
+# Interpolate DAY_TEMP -> NIGHT_TEMP in mired space (perceptually even).
+def lerp_temp(frac)
+  frac = frac.clamp(0.0, 1.0)
+  day_m = 1e6 / DAY_TEMP
+  night_m = 1e6 / NIGHT_TEMP
+  (1e6 / (day_m + (night_m - day_m) * frac)).round
+end
+
+# A temperature in K, or nil for identity (full day).
+def target(now)
+  sunrise, sunset = sun_times(now, LAT, LON)
+  if now < sunrise then NIGHT_TEMP
+  elsif now < sunrise + RAMP then lerp_temp(1 - (now - sunrise) / RAMP)
+  elsif now < sunset - RAMP then nil
+  elsif now < sunset then lerp_temp(1 - (sunset - now) / RAMP)
+  else NIGHT_TEMP
+  end
+end
+
+def main
+  want = target(Time.now)
+  want_s = want.nil? ? "identity" : want.to_s
+  last = File.exist?(STATE) ? File.read(STATE).strip : nil
+  return if want_s == last
+
+  # Start hyprsunset the way Omarchy's night light does if it isn't running.
+  unless system("pgrep", "-x", "hyprsunset", out: File::NULL)
+    Process.detach(spawn("uwsm-app", "--", "hyprsunset", pgroup: true, out: File::NULL, err: File::NULL))
+    sleep 1
+  end
+
+  cmd = want.nil? ? %w[hyprctl hyprsunset identity] : ["hyprctl", "hyprsunset", "temperature", want.to_s]
+  out, err, status = Open3.capture3(*cmd)
+  abort "#{cmd.join(' ')} failed: #{out.strip} #{err.strip}" unless status.success? && out.downcase.include?("ok")
+
+  FileUtils.mkdir_p(File.dirname(STATE))
+  File.write(STATE, "#{want_s}\n")
+end
+
+main if $PROGRAM_NAME == __FILE__
